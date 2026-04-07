@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
     `notes`           TEXT DEFAULT NULL,
     `internal_notes`  TEXT DEFAULT NULL,
     `source`          VARCHAR(50) DEFAULT 'manual',
+    `ml_features`     JSON DEFAULT NULL,
     `created_by`      INT UNSIGNED DEFAULT NULL,
     `confirmed_by`    INT UNSIGNED DEFAULT NULL,
     `confirmed_at`    DATETIME DEFAULT NULL,

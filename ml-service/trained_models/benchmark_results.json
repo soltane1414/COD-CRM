@@ -1,0 +1,194 @@
+[
+  {
+    "model": "Naive (last value)",
+    "horizon": 14,
+    "mae": 837738.37,
+    "rmse": 910728.89,
+    "mape": 467.94,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Seasonal Naive (7d)",
+    "horizon": 14,
+    "mae": 583243.43,
+    "rmse": 722815.42,
+    "mape": 406.47,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Moving Avg (7d)",
+    "horizon": 14,
+    "mae": 583243.43,
+    "rmse": 683955.0,
+    "mape": 365.16,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Moving Avg (30d)",
+    "horizon": 14,
+    "mae": 591021.4,
+    "rmse": 690599.62,
+    "mape": 368.3,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Holt-Winters (ETS)",
+    "horizon": 14,
+    "mae": 658975.89,
+    "rmse": 767857.07,
+    "mape": 418.11,
+    "time_sec": 0.29
+  },
+  {
+    "model": "SARIMAX (1,1,1)(1,1,1,7)",
+    "horizon": 14,
+    "mae": 668753.14,
+    "rmse": 774757.55,
+    "mape": 422.19,
+    "time_sec": 1.4
+  },
+  {
+    "model": "Prophet",
+    "horizon": 14,
+    "mae": 563779.66,
+    "rmse": 710790.88,
+    "mape": 397.27,
+    "time_sec": 0.62
+  },
+  {
+    "model": "Chronos-T5-Small",
+    "horizon": 14,
+    "mae": 510260.46,
+    "rmse": 619030.53,
+    "mape": 341.3,
+    "time_sec": 10.59
+  },
+  {
+    "model": "Naive (last value)",
+    "horizon": 30,
+    "mae": 388307.93,
+    "rmse": 517166.03,
+    "mape": 186.01,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Seasonal Naive (7d)",
+    "horizon": 30,
+    "mae": 327196.03,
+    "rmse": 469805.42,
+    "mape": 178.81,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Moving Avg (7d)",
+    "horizon": 30,
+    "mae": 363075.07,
+    "rmse": 466569.89,
+    "mape": 163.93,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Moving Avg (30d)",
+    "horizon": 30,
+    "mae": 385161.69,
+    "rmse": 451726.41,
+    "mape": 137.39,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Holt-Winters (ETS)",
+    "horizon": 30,
+    "mae": 339454.93,
+    "rmse": 468078.69,
+    "mape": 173.6,
+    "time_sec": 0.27
+  },
+  {
+    "model": "SARIMAX (1,1,1)(1,1,1,7)",
+    "horizon": 30,
+    "mae": 337486.03,
+    "rmse": 464422.04,
+    "mape": 171.92,
+    "time_sec": 1.3
+  },
+  {
+    "model": "Prophet",
+    "horizon": 30,
+    "mae": 375327.59,
+    "rmse": 473656.66,
+    "mape": 175.79,
+    "time_sec": 0.64
+  },
+  {
+    "model": "Chronos-T5-Small",
+    "horizon": 30,
+    "mae": 340735.3,
+    "rmse": 400256.91,
+    "mape": 135.51,
+    "time_sec": 18.81
+  },
+  {
+    "model": "Naive (last value)",
+    "horizon": 60,
+    "mae": 474688.47,
+    "rmse": 547780.99,
+    "mape": 70.16,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Seasonal Naive (7d)",
+    "horizon": 60,
+    "mae": 305534.32,
+    "rmse": 368094.68,
+    "mape": 85.21,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Moving Avg (7d)",
+    "horizon": 60,
+    "mae": 301400.56,
+    "rmse": 371510.89,
+    "mape": 81.36,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Moving Avg (30d)",
+    "horizon": 60,
+    "mae": 295159.28,
+    "rmse": 367295.95,
+    "mape": 86.44,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Holt-Winters (ETS)",
+    "horizon": 60,
+    "mae": 303609.64,
+    "rmse": 362101.8,
+    "mape": 85.62,
+    "time_sec": 0.26
+  },
+  {
+    "model": "SARIMAX (1,1,1)(1,1,1,7)",
+    "horizon": 60,
+    "mae": 313064.33,
+    "rmse": 364582.96,
+    "mape": 81.16,
+    "time_sec": 1.2
+  },
+  {
+    "model": "Prophet",
+    "horizon": 60,
+    "mae": 265663.32,
+    "rmse": 363848.11,
+    "mape": 99.07,
+    "time_sec": 0.5
+  },
+  {
+    "model": "Chronos-T5-Small",
+    "horizon": 60,
+    "mae": 333933.89,
+    "rmse": 383693.07,
+    "mape": 74.01,
+    "time_sec": 34.68
+  }
+]

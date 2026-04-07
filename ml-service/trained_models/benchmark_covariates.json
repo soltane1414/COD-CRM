@@ -1,0 +1,38 @@
+[
+  {
+    "model": "Moving Avg 7d (baseline)",
+    "supports_covariates": false,
+    "mae": 363075.07,
+    "rmse": 466569.89,
+    "mape": 163.93,
+    "time_sec": 0.0
+  },
+  {
+    "model": "Chronos-T5-Small",
+    "supports_covariates": false,
+    "mae": 338231.06,
+    "rmse": 395363.02,
+    "mape": 132.9,
+    "time_sec": 35.04
+  },
+  {
+    "model": "Prophet + Islamic holidays",
+    "supports_covariates": true,
+    "mae": 376292.31,
+    "rmse": 447735.59,
+    "mape": 150.55,
+    "time_sec": 1.13
+  },
+  {
+    "model": "NeuralProphet + Islamic events",
+    "error": "expected string or bytes-like object, got 'NoneType'"
+  },
+  {
+    "model": "LightGBM + lags + holidays",
+    "supports_covariates": true,
+    "mae": 318741.13,
+    "rmse": 416501.14,
+    "mape": 148.0,
+    "time_sec": 8.66
+  }
+]

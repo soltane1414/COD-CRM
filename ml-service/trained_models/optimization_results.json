@@ -1,0 +1,162 @@
+[
+  {
+    "experiment": "target_features",
+    "target": "noisy",
+    "features": "original",
+    "n_features": 20,
+    "n_samples": 99441,
+    "failure_rate": "2.98%",
+    "auc_mean": 0.9897,
+    "auc_std": 0.0018,
+    "time_sec": 31.1,
+    "description": "Current baseline (noisy target + original features)"
+  },
+  {
+    "experiment": "target_features",
+    "target": "noisy",
+    "features": "clean",
+    "n_features": 17,
+    "n_samples": 99441,
+    "failure_rate": "2.98%",
+    "auc_mean": 0.9899,
+    "auc_std": 0.002,
+    "time_sec": 21.6,
+    "description": "Noisy target + clean features (no noise)"
+  },
+  {
+    "experiment": "target_features",
+    "target": "noisy",
+    "features": "enhanced",
+    "n_features": 31,
+    "n_samples": 99441,
+    "failure_rate": "2.98%",
+    "auc_mean": 0.9909,
+    "auc_std": 0.0011,
+    "time_sec": 27.7,
+    "description": "Noisy target + enhanced features"
+  },
+  {
+    "experiment": "target_features",
+    "target": "clean",
+    "features": "original",
+    "n_features": 20,
+    "n_samples": 97712,
+    "failure_rate": "1.26%",
+    "auc_mean": 0.9948,
+    "auc_std": 0.0011,
+    "time_sec": 19.5,
+    "description": "Clean target + original features"
+  },
+  {
+    "experiment": "target_features",
+    "target": "clean",
+    "features": "clean",
+    "n_features": 17,
+    "n_samples": 97712,
+    "failure_rate": "1.26%",
+    "auc_mean": 0.995,
+    "auc_std": 0.0012,
+    "time_sec": 19.6,
+    "description": "Clean target + clean features"
+  },
+  {
+    "experiment": "target_features",
+    "target": "clean",
+    "features": "enhanced",
+    "n_features": 31,
+    "n_samples": 97712,
+    "failure_rate": "1.26%",
+    "auc_mean": 0.9957,
+    "auc_std": 0.0023,
+    "time_sec": 23.1,
+    "description": "Clean target + enhanced features"
+  },
+  {
+    "experiment": "resampling",
+    "method": "none",
+    "auc_mean": 0.9944,
+    "auc_std": 0.0034,
+    "time_sec": 16.1,
+    "description": "No resampling"
+  },
+  {
+    "experiment": "resampling",
+    "method": "none_classweight",
+    "auc_mean": 0.9943,
+    "auc_std": 0.003,
+    "time_sec": 17.0,
+    "description": "No resampling + class_weight"
+  },
+  {
+    "experiment": "resampling",
+    "method": "smote_02",
+    "auc_mean": 0.9957,
+    "auc_std": 0.0023,
+    "time_sec": 23.4,
+    "description": "SMOTE ratio=0.2"
+  },
+  {
+    "experiment": "resampling",
+    "method": "smote_05",
+    "auc_mean": 0.9945,
+    "auc_std": 0.0021,
+    "time_sec": 27.2,
+    "description": "SMOTE ratio=0.5"
+  },
+  {
+    "experiment": "resampling",
+    "method": "smote_10",
+    "auc_mean": 0.9953,
+    "auc_std": 0.0023,
+    "time_sec": 33.4,
+    "description": "SMOTE ratio=1.0 (balanced)"
+  },
+  {
+    "experiment": "resampling",
+    "method": "borderline",
+    "auc_mean": 0.9946,
+    "auc_std": 0.003,
+    "time_sec": 28.4,
+    "description": "BorderlineSMOTE ratio=0.3"
+  },
+  {
+    "experiment": "resampling",
+    "method": "adasyn",
+    "auc_mean": 0.9962,
+    "auc_std": 0.0023,
+    "time_sec": 29.6,
+    "description": "ADASYN ratio=0.3"
+  },
+  {
+    "experiment": "resampling",
+    "method": "smote_tomek",
+    "auc_mean": 0.9949,
+    "auc_std": 0.0027,
+    "time_sec": 486.9,
+    "description": "SMOTE-Tomek ratio=0.3"
+  },
+  {
+    "experiment": "optuna",
+    "auc_mean": 0.9966,
+    "best_params": {
+      "n_estimators": 1289,
+      "max_depth": 12,
+      "learning_rate": 0.01808042386360026,
+      "num_leaves": 99,
+      "subsample": 0.515503747719184,
+      "colsample_bytree": 0.42322549679345645,
+      "min_child_samples": 100,
+      "reg_alpha": 2.074450019115465e-08,
+      "reg_lambda": 3.795488538175941e-07
+    },
+    "time_sec": 3494.1
+  },
+  {
+    "experiment": "ensemble",
+    "catboost_auc": 0.9893,
+    "lightgbm_auc": 0.9966,
+    "xgboost_auc": 0.995,
+    "ensemble_auc": 0.9933,
+    "ensemble_std": 0.0023
+  }
+]

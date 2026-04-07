@@ -1,0 +1,257 @@
+<mxfile host="draw.io" modified="2026-03-01T00:00:00.000Z" agent="draw.io" version="24.0.0" type="device">
+  <diagram id="ml-pipeline" name="ML Training Pipeline">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== PHASE LABELS ===== -->
+        <mxCell id="phase1_label" value="PHASE 1: DATA PREPARATION" style="text;html=1;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="20" width="280" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="phase2_label" value="PHASE 2: MODEL TRAINING" style="text;html=1;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="20" width="780" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="phase3_label" value="PHASE 3: DEPLOYMENT" style="text;html=1;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="1210" y="20" width="260" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PHASE 1 - DATA PREPARATION ===== -->
+        <!-- Olist Dataset -->
+        <mxCell id="p1_dataset" value="&lt;b&gt;Olist Dataset&lt;/b&gt;&lt;br&gt;9 CSV files on Kaggle" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="90" y="80" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Load & Merge -->
+        <mxCell id="p1_load" value="&lt;b&gt;Load &amp; Merge Datasets&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="90" y="185" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_p1_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="p1_dataset" target="p1_load" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Transform to CRM Format -->
+        <mxCell id="p1_transform" value="&lt;b&gt;Transform to CRM Format&lt;/b&gt;&lt;hr size=&quot;1&quot;&gt;&lt;font size=&quot;1&quot;&gt;States &amp;rarr; Wilayas mapping&lt;br&gt;BRL &amp;rarr; DZD (&amp;times;27)&lt;br&gt;Status mapping&lt;br&gt;Category translation (PT&amp;rarr;EN)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=center;" vertex="1" parent="1">
+          <mxGeometry x="70" y="260" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="e_p1_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="p1_load" target="p1_transform" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Feature Engineering -->
+        <mxCell id="p1_features" value="&lt;b&gt;Feature Engineering&lt;/b&gt;&lt;br&gt;31 features" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="90" y="405" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="e_p1_3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="p1_transform" target="p1_features" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Output -->
+        <mxCell id="p1_output" value="&lt;b&gt;99,441&lt;/b&gt;&lt;br&gt;prepared orders" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="80" y="485" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_p1_4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="p1_features" target="p1_output" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Connector from Phase 1 to Phase 2 (3 branches) ===== -->
+        <!-- Branch A arrow -->
+        <mxCell id="e_to_A" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#b85450;strokeWidth=2;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" edge="1" source="p1_output" target="p2a_split" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Branch B arrow -->
+        <mxCell id="e_to_B" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#d79b00;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" source="p1_output" target="p2b_rfm" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Branch C arrow -->
+        <mxCell id="e_to_C" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#6d8764;strokeWidth=2;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" edge="1" source="p1_output" target="p2c_agg" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PHASE 2 - BRANCH A: RISK PREDICTION (Red tones) ===== -->
+        <mxCell id="p2a_header" value="&lt;b&gt;Risk Prediction&lt;/b&gt;" style="text;html=1;fontSize=12;fontStyle=5;align=center;verticalAlign=middle;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="70" width="220" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2a_split" value="&lt;b&gt;Train/Test Split&lt;/b&gt;&lt;br&gt;80/20, stratified&lt;br&gt;&lt;font size=&quot;1&quot;&gt;+ ADASYN resampling&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="400" y="110" width="180" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2a_cat" value="CatBoost &amp;rarr; AUC: 1.0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="400" y="170" width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e_a1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;strokeWidth=1.5;" edge="1" source="p2a_split" target="p2a_cat" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2a_lgbm" value="LightGBM &amp;rarr; AUC: 1.0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="400" y="218" width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e_a2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;strokeWidth=1.5;" edge="1" source="p2a_cat" target="p2a_lgbm" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2a_xgb" value="XGBoost &amp;rarr; AUC: 1.0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="400" y="266" width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e_a3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;strokeWidth=1.5;" edge="1" source="p2a_lgbm" target="p2a_xgb" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2a_ensemble" value="&lt;b&gt;Ensemble&lt;/b&gt;&lt;br&gt;Weighted Soft Voting&lt;br&gt;&lt;font size=&quot;1&quot;&gt;Optuna-tuned (40 trials)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="400" y="318" width="180" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="e_a4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;strokeWidth=1.5;" edge="1" source="p2a_xgb" target="p2a_ensemble" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2a_save" value="&lt;b&gt;risk_ensemble.joblib&lt;/b&gt;&lt;br&gt;4 MB" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="415" y="380" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_a5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;strokeWidth=1.5;" edge="1" source="p2a_ensemble" target="p2a_save" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PHASE 2 - BRANCH B: CUSTOMER SEGMENTATION (Orange/Amber tones) ===== -->
+        <mxCell id="p2b_header" value="&lt;b&gt;Customer Segmentation&lt;/b&gt;" style="text;html=1;fontSize=12;fontStyle=5;align=center;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="70" width="220" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2b_rfm" value="&lt;b&gt;RFM Computation&lt;/b&gt;&lt;br&gt;per customer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="110" width="180" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2b_scale" value="StandardScaler Normalization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="170" width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e_b1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#d6b656;strokeWidth=1.5;" edge="1" source="p2b_rfm" target="p2b_scale" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2b_hdbscan" value="&lt;b&gt;HDBSCAN Clustering&lt;/b&gt;&lt;br&gt;min_cluster_size=50" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="218" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_b2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#d6b656;strokeWidth=1.5;" edge="1" source="p2b_scale" target="p2b_hdbscan" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2b_noise" value="Noise Reassignment&lt;br&gt;(NearestCentroid)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="274" width="180" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="e_b3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#d6b656;strokeWidth=1.5;" edge="1" source="p2b_hdbscan" target="p2b_noise" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2b_segments" value="&lt;b&gt;5 Segments&lt;/b&gt; identified" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="670" y="326" width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e_b4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#d6b656;strokeWidth=1.5;" edge="1" source="p2b_noise" target="p2b_segments" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2b_save" value="&lt;b&gt;segmenter.joblib&lt;/b&gt;&lt;br&gt;10 MB" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="685" y="380" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_b5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#d6b656;strokeWidth=1.5;" edge="1" source="p2b_segments" target="p2b_save" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PHASE 2 - BRANCH C: DEMAND FORECASTING (Green tones) ===== -->
+        <mxCell id="p2c_header" value="&lt;b&gt;Demand Forecasting&lt;/b&gt;" style="text;html=1;fontSize=12;fontStyle=5;align=center;verticalAlign=middle;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="70" width="220" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2c_agg" value="&lt;b&gt;Daily Revenue Aggregation&lt;/b&gt;&lt;br&gt;714 days" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="940" y="110" width="180" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2c_prophet" value="&lt;b&gt;LightGBM + Algerian Calendar&lt;/b&gt;&lt;br&gt;21 covariates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="940" y="170" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#82b366;strokeWidth=1.5;" edge="1" source="p2c_agg" target="p2c_prophet" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2c_category" value="Per-category models&lt;br&gt;(top 3 categories)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="940" y="228" width="180" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="e_c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#82b366;strokeWidth=1.5;" edge="1" source="p2c_prophet" target="p2c_category" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2c_mae" value="MAE: &lt;b&gt;318,741 DZD&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="940" y="282" width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e_c3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#82b366;strokeWidth=1.5;" edge="1" source="p2c_category" target="p2c_mae" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2c_save" value="&lt;b&gt;forecaster_models.joblib&lt;/b&gt;&lt;br&gt;278 KB" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="950" y="336" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_c4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#82b366;strokeWidth=1.5;" edge="1" source="p2c_mae" target="p2c_save" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PHASE 3 - DEPLOYMENT ===== -->
+        <mxCell id="p3_fastapi" value="&lt;b&gt;FastAPI Service&lt;/b&gt;&lt;br&gt;port 8001" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=0;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="170" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p3_endpoints" value="&lt;b&gt;15 REST Endpoints&lt;/b&gt;&lt;br&gt;&lt;font size=&quot;1&quot;&gt;/predict, /segment, /forecast, /retrain ...&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="260" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_p3_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#82b366;strokeWidth=2;" edge="1" source="p3_fastapi" target="p3_endpoints" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p3_php" value="&lt;b&gt;PHP Backend&lt;/b&gt;&lt;br&gt;Integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="350" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_p3_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#82b366;strokeWidth=2;" edge="1" source="p3_endpoints" target="p3_php" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Connectors from saved models to FastAPI -->
+        <mxCell id="e_deploy_a" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#b85450;strokeWidth=2;dashed=1;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" edge="1" source="p2a_save" target="p3_fastapi" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1190" y="405" />
+              <mxPoint x="1190" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_deploy_b" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#d6b656;strokeWidth=2;dashed=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="p2b_save" target="p3_fastapi" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="405" />
+              <mxPoint x="1200" y="195" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_deploy_c" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#82b366;strokeWidth=2;dashed=1;entryX=0;entryY=0.8;entryDx=0;entryDy=0;" edge="1" source="p2c_save" target="p3_fastapi" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1210" y="361" />
+              <mxPoint x="1210" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== VERTICAL PHASE DIVIDERS ===== -->
+        <mxCell id="divider1" value="" style="shape=line;strokeColor=#999999;strokeWidth=1;dashed=1;dashPattern=8 4;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="340" y="20" width="1" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="divider2" value="" style="shape=line;strokeColor=#999999;strokeWidth=1;dashed=1;dashPattern=8 4;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="1185" y="20" width="1" height="530" as="geometry" />
+        </mxCell>
+
+        <!-- ===== TITLE ===== -->
+        <mxCell id="title" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;COD-CRM ML Training Pipeline&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="500" y="560" width="500" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

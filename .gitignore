@@ -42,3 +42,32 @@ desktop.ini
 *.map
 coverage/
 .turbo/
+tmpclaude-*
+docs/tmpclaude-*
+email.md
+Untitled-1.md
+
+# === ML Service ===
+ml-service/data/olist/*.csv
+ml-service/data/prepared/*.csv
+ml-service/trained_models/*.joblib
+ml-service/trained_models/backup/
+ml-service/catboost_info/
+ml-service/__pycache__/
+ml-service/app/__pycache__/
+ml-service/app/**/__pycache__/
+__pycache__/
+*.pyc
+
+# === LaTeX build files ===
+docs/*.aux
+docs/*.out
+docs/*.toc
+docs/*.lof
+docs/*.lot
+docs/*.fls
+docs/*.fdb_latexmk
+docs/*.synctex.gz
+
+# Generated seed data (regenerate with ml-service/generate_data.py)
+seed_data.sql

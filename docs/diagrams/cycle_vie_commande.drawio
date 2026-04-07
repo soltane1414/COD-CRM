@@ -1,0 +1,252 @@
+<mxfile host="app.diagrams.net" modified="2026-03-01T12:00:00.000Z" agent="Claude" version="21.0.0" type="device">
+  <diagram id="cycle-vie-commande" name="Cycle de vie - Commande COD">
+    <mxGraphModel dx="1100" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ========== TITLE ========== -->
+        <mxCell id="title" value="&lt;b&gt;Cycle de Vie d&#39;une Commande COD&lt;/b&gt;&lt;br&gt;avec Int&#233;gration IA (Risk Scoring)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="310" y="15" width="380" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ========== START CIRCLE ========== -->
+        <mxCell id="start" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;fontColor=#FFFFFF;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="30" y="195" width="35" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- ========== STATES ========== -->
+
+        <!-- NEW (yellow) -->
+        <mxCell id="state_new" value="&lt;b&gt;new&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Nouvelle commande&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontStyle=0;fontSize=12;arcSize=25;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="185" width="140" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- CONFIRMED (blue) -->
+        <mxCell id="state_confirmed" value="&lt;b&gt;confirmed&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Confirm&#233;e par agent&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontStyle=0;fontSize=12;arcSize=25;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="185" width="140" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- PROCESSING (cyan) -->
+        <mxCell id="state_processing" value="&lt;b&gt;processing&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;En pr&#233;paration&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fillColor=#E6F3FF;strokeColor=#36A2EB;fontStyle=0;fontSize=12;arcSize=25;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="630" y="185" width="140" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- SHIPPED (orange) -->
+        <mxCell id="state_shipped" value="&lt;b&gt;shipped&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Exp&#233;di&#233;e&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontStyle=0;fontSize=12;arcSize=25;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="185" width="140" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- DELIVERED (green, bold border, terminal) -->
+        <mxCell id="state_delivered" value="&lt;b&gt;delivered &#10004;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Livr&#233;e avec succ&#232;s&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#2D7600;strokeWidth=3;fontStyle=0;fontSize=12;arcSize=25;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="80" width="140" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- CANCELLED (red) -->
+        <mxCell id="state_cancelled" value="&lt;b&gt;cancelled&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Annul&#233;e&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontStyle=0;fontSize=12;arcSize=25;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="370" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- NO_ANSWER (gray) -->
+        <mxCell id="state_no_answer" value="&lt;b&gt;no_answer&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Client injoignable&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6E6E6;strokeColor=#999999;fontStyle=0;fontSize=12;arcSize=25;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="370" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- POSTPONED (light gray) -->
+        <mxCell id="state_postponed" value="&lt;b&gt;postponed&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Report&#233;e&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#CCCCCC;fontStyle=0;fontSize=12;arcSize=25;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="535" y="370" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- RETURNED (dark red) -->
+        <mxCell id="state_returned" value="&lt;b&gt;returned&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Retourn&#233;e&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6B8AF;strokeColor=#990000;fontStyle=0;fontSize=12;arcSize=25;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="370" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ========== AI INTEGRATION BOX ========== -->
+        <mxCell id="ai_box" value="&lt;b&gt;&#129302; AI Risk Scoring&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Analyse automatique&lt;br&gt;du risque commande&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;dashed=1;dashPattern=5 3;strokeWidth=2;fontSize=12;arcSize=15;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="80" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- DECISION DIAMOND -->
+        <mxCell id="ai_decision" value="&lt;b&gt;Risk&lt;br&gt;Level?&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;fontSize=11;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="325" y="72" width="90" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- AI output labels -->
+        <mxCell id="ai_low" value="&lt;font style=&quot;font-size:10px;color:#2D7600;&quot;&gt;&lt;b&gt;Low / Medium&lt;/b&gt;&lt;br&gt;Proceed to&lt;br&gt;confirmation&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="65" width="90" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ai_high" value="&lt;font style=&quot;font-size:10px;color:#B85450;&quot;&gt;&lt;b&gt;High / Critical&lt;/b&gt;&lt;br&gt;Priority verification call&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="155" y="15" width="150" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ========== TRANSITIONS (EDGES) ========== -->
+
+        <!-- Start → new -->
+        <mxCell id="e_start_new" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=2;strokeColor=#333333;" edge="1" source="start" target="state_new" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- new → AI box (dashed) -->
+        <mxCell id="e_new_ai" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#9673A6;dashed=1;dashPattern=5 3;" edge="1" source="state_new" target="ai_box" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- AI box → Decision diamond -->
+        <mxCell id="e_ai_decision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#9673A6;dashed=1;dashPattern=5 3;" edge="1" source="ai_box" target="ai_decision" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Decision → confirmed (low/medium) -->
+        <mxCell id="e_decision_confirmed" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#2D7600;dashed=1;dashPattern=5 3;" edge="1" source="ai_decision" target="state_confirmed" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="110" />
+              <mxPoint x="460" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Decision → back to new (high risk, priority call) -->
+        <mxCell id="e_decision_high" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#B85450;dashed=1;dashPattern=5 3;exitX=0;exitY=0;exitDx=0;exitDy=0;" edge="1" source="ai_decision" target="state_new" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="310" y="50" />
+              <mxPoint x="190" y="50" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== HAPPY PATH (thick green arrows) ===== -->
+
+        <!-- new → confirmed -->
+        <mxCell id="e_new_confirmed" value="Agent confirms" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;strokeColor=#2D7600;fontColor=#2D7600;fontSize=10;" edge="1" source="state_new" target="state_confirmed" parent="1">
+          <mxGeometry x="0.0" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- confirmed → processing -->
+        <mxCell id="e_confirmed_processing" value="Start preparation" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;strokeColor=#2D7600;fontColor=#2D7600;fontSize=10;" edge="1" source="state_confirmed" target="state_processing" parent="1">
+          <mxGeometry x="0.0" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- processing → shipped -->
+        <mxCell id="e_processing_shipped" value="Dispatched" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;strokeColor=#2D7600;fontColor=#2D7600;fontSize=10;" edge="1" source="state_processing" target="state_shipped" parent="1">
+          <mxGeometry x="0.0" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- shipped → delivered -->
+        <mxCell id="e_shipped_delivered" value="Successful delivery" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=3;strokeColor=#2D7600;fontColor=#2D7600;fontSize=10;" edge="1" source="state_shipped" target="state_delivered" parent="1">
+          <mxGeometry x="0.0" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== ALTERNATIVE / ERROR PATHS ===== -->
+
+        <!-- new → cancelled -->
+        <mxCell id="e_new_cancelled" value="Cancel order" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#B85450;fontColor=#B85450;fontSize=9;" edge="1" source="state_new" target="state_cancelled" parent="1">
+          <mxGeometry x="0.0" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="230" y="310" />
+              <mxPoint x="325" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- new → no_answer -->
+        <mxCell id="e_new_noanswer" value="Can't reach customer" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#999999;fontColor=#666666;fontSize=9;" edge="1" source="state_new" target="state_no_answer" parent="1">
+          <mxGeometry x="0.0" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="155" y="310" />
+              <mxPoint x="145" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- no_answer → confirmed -->
+        <mxCell id="e_noanswer_confirmed" value="Customer reached later" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#6C8EBF;fontColor=#6C8EBF;fontSize=9;" edge="1" source="state_no_answer" target="state_confirmed" parent="1">
+          <mxGeometry x="0.0" y="0" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="145" y="450" />
+              <mxPoint x="460" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- no_answer → cancelled -->
+        <mxCell id="e_noanswer_cancelled" value="After max attempts" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#B85450;fontColor=#B85450;fontSize=9;" edge="1" source="state_no_answer" target="state_cancelled" parent="1">
+          <mxGeometry x="0.0" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- confirmed → postponed -->
+        <mxCell id="e_confirmed_postponed" value="Customer requests delay" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#CCCCCC;fontColor=#999999;fontSize=9;" edge="1" source="state_confirmed" target="state_postponed" parent="1">
+          <mxGeometry x="0.0" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- postponed → processing -->
+        <mxCell id="e_postponed_processing" value="Ready to proceed" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#36A2EB;fontColor=#36A2EB;fontSize=9;" edge="1" source="state_postponed" target="state_processing" parent="1">
+          <mxGeometry x="0.0" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- shipped → returned -->
+        <mxCell id="e_shipped_returned" value="Customer refused / failed delivery" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeWidth=1;strokeColor=#990000;fontColor=#990000;fontSize=9;" edge="1" source="state_shipped" target="state_returned" parent="1">
+          <mxGeometry x="0.0" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ========== LEGEND ========== -->
+        <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#CCCCCC;arcSize=10;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="510" width="310" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" value="&lt;b&gt;L&#233;gende&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="30" y="512" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_happy" value="" style="endArrow=classic;html=1;strokeWidth=3;strokeColor=#2D7600;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="30" y="555" as="sourcePoint" />
+            <mxPoint x="80" y="555" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend_happy_txt" value="&lt;font style=&quot;font-size:10px;&quot;&gt;Happy path (parcours nominal)&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="85" y="542" width="180" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_alt" value="" style="endArrow=classic;html=1;strokeWidth=1;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="30" y="580" as="sourcePoint" />
+            <mxPoint x="80" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend_alt_txt" value="&lt;font style=&quot;font-size:10px;&quot;&gt;Transition alternative&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="85" y="567" width="130" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_ai" value="" style="endArrow=classic;html=1;strokeWidth=1;strokeColor=#9673A6;dashed=1;dashPattern=5 3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="30" y="600" as="sourcePoint" />
+            <mxPoint x="80" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend_ai_txt" value="&lt;font style=&quot;font-size:10px;&quot;&gt;AI Risk Scoring (int&#233;gration IA)&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="85" y="590" width="190" height="28" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

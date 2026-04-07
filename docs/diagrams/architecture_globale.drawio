@@ -1,0 +1,231 @@
+<mxfile host="app.diagrams.net" modified="2026-03-01T10:00:00.000Z" agent="Claude" version="22.1.0" type="device">
+  <diagram id="cod-crm-architecture" name="Architecture Globale">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ============================================================ -->
+        <!-- TITLE                                                        -->
+        <!-- ============================================================ -->
+        <mxCell id="title" value="Architecture Globale &amp;mdash; COD E-Commerce CRM" style="text;html=1;fontSize=20;fontStyle=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="200" y="15" width="600" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- 1. CLIENT LAYER (top)                                        -->
+        <!-- ============================================================ -->
+        <mxCell id="client_group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;dashPattern=5 5;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="310" y="60" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="client_label" value="Client Layer" style="text;html=1;fontSize=11;fontStyle=1;align=left;verticalAlign=top;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="320" y="62" width="100" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="browser" value="Web Browser" style="shape=mxgraph.cisco.computers_and_peripherals.web_browser;html=1;sketch=0;fillColor=#036897;strokeColor=none;fontColor=#333333;fontSize=10;verticalLabelPosition=bottom;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="355" y="78" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile" value="Mobile App" style="shape=mxgraph.android.phone2;fillColor=#036897;strokeColor=none;html=1;fontColor=#333333;fontSize=10;verticalLabelPosition=bottom;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="500" y="78" width="25" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- ARROW: Client -> Frontend (HTTPS)                            -->
+        <!-- ============================================================ -->
+        <mxCell id="arrow_client_fe" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#333333;fontColor=#333333;fontSize=10;fontStyle=1;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="client_group" target="frontend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- 2. FRONTEND (blue)                                           -->
+        <!-- ============================================================ -->
+        <mxCell id="frontend" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#2d6da3;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="295" y="170" width="310" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_title" value="&lt;b&gt;Frontend&lt;/b&gt;" style="text;html=1;fontSize=14;align=center;verticalAlign=top;fontColor=#1a3c6e;" vertex="1" parent="1">
+          <mxGeometry x="390" y="175" width="120" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_tech" value="Next.js 14+ &amp;nbsp;|&amp;nbsp; React &amp;nbsp;|&amp;nbsp; TypeScript" style="text;html=1;fontSize=10;align=center;verticalAlign=middle;fontColor=#4a76a8;" vertex="1" parent="1">
+          <mxGeometry x="330" y="200" width="240" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_details" value="ShadCN UI &amp;bull; TanStack Query &amp;bull; Recharts &amp;bull; Zustand" style="text;html=1;fontSize=9;align=center;verticalAlign=middle;fontColor=#7a9cc6;" vertex="1" parent="1">
+          <mxGeometry x="310" y="220" width="280" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- ARROW: Frontend <-> Backend (REST API / JSON)                -->
+        <!-- ============================================================ -->
+        <mxCell id="arrow_fe_be" value="REST API / JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#333333;fontColor=#333333;fontSize=10;fontStyle=1;startArrow=classic;endArrow=classic;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="frontend" target="backend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- 3. BACKEND API (green)                                       -->
+        <!-- ============================================================ -->
+        <mxCell id="backend" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#2d7d3a;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="310" width="480" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="be_title" value="&lt;b&gt;Backend API&lt;/b&gt;" style="text;html=1;fontSize=14;align=center;verticalAlign=top;fontColor=#1a5c2a;" vertex="1" parent="1">
+          <mxGeometry x="300" y="315" width="140" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="be_tech" value="PHP 8.2 &amp;nbsp;|&amp;nbsp; Clean Architecture &amp;nbsp;|&amp;nbsp; Laravel" style="text;html=1;fontSize=10;align=center;verticalAlign=middle;fontColor=#3a8a4a;" vertex="1" parent="1">
+          <mxGeometry x="250" y="338" width="240" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- Backend sub-modules row 1 -->
+        <mxCell id="mod_auth" value="Auth&#xa;Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#43a047;fontSize=9;fontStyle=1;fontColor=#2e7d32;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="150" y="365" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mod_order" value="Order&#xa;Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#43a047;fontSize=9;fontStyle=1;fontColor=#2e7d32;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="245" y="365" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mod_product" value="Product&#xa;Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#43a047;fontSize=9;fontStyle=1;fontColor=#2e7d32;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="340" y="365" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mod_analytics" value="Analytics&#xa;Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#43a047;fontSize=9;fontStyle=1;fontColor=#2e7d32;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="435" y="365" width="85" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Backend sub-modules row 2 -->
+        <mxCell id="mod_ai" value="AIInsights&#xa;Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#43a047;fontSize=9;fontStyle=1;fontColor=#2e7d32;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="150" y="420" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mod_customer" value="Customer&#xa;Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#43a047;fontSize=9;fontStyle=1;fontColor=#2e7d32;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="245" y="420" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mod_delivery" value="Delivery&#xa;Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#43a047;fontSize=9;fontStyle=1;fontColor=#2e7d32;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="340" y="420" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mod_more" value="+ 4 more&#xa;modules ..." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#a5d6a7;fontSize=9;fontStyle=2;fontColor=#66bb6a;verticalAlign=middle;align=center;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="435" y="420" width="85" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Backend bottom note -->
+        <mxCell id="be_layers" value="Domain &amp;bull; Application &amp;bull; Infrastructure &amp;bull; Presentation" style="text;html=1;fontSize=8;align=center;verticalAlign=middle;fontColor=#81c784;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="220" y="475" width="300" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- ARROW: Backend <-> ML Service (HTTP / JSON)                  -->
+        <!-- ============================================================ -->
+        <mxCell id="arrow_be_ml" value="HTTP / JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#e65100;fontColor=#e65100;fontSize=10;fontStyle=1;startArrow=classic;endArrow=classic;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="backend" target="ml_service">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- 4. ML MICROSERVICE (orange)                                  -->
+        <!-- ============================================================ -->
+        <mxCell id="ml_service" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6940b;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="290" width="200" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="ml_title" value="&lt;b&gt;ML Microservice&lt;/b&gt;" style="text;html=1;fontSize=13;align=center;verticalAlign=top;fontColor=#a36800;" vertex="1" parent="1">
+          <mxGeometry x="720" y="295" width="160" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="ml_tech" value="Python 3.11 &amp;nbsp;|&amp;nbsp; FastAPI" style="text;html=1;fontSize=10;align=center;verticalAlign=middle;fontColor=#c68a00;" vertex="1" parent="1">
+          <mxGeometry x="725" y="318" width="150" height="16" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ml_risk" value="Risk Prediction&#xa;API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffecb3;strokeColor=#ffa000;fontSize=9;fontStyle=1;fontColor=#e65100;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="720" y="345" width="160" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="ml_seg" value="Segmentation&#xa;API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffecb3;strokeColor=#ffa000;fontSize=9;fontStyle=1;fontColor=#e65100;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="720" y="388" width="160" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="ml_forecast" value="Forecasting&#xa;API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffecb3;strokeColor=#ffa000;fontSize=9;fontStyle=1;fontColor=#e65100;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="720" y="431" width="160" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="ml_llm" value="LLM Insights&#xa;API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffecb3;strokeColor=#ffa000;fontSize=9;fontStyle=1;fontColor=#e65100;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="720" y="474" width="160" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- Trained Models (file system)                                 -->
+        <!-- ============================================================ -->
+        <mxCell id="models_store" value="Trained Models&#xa;(.joblib / .pkl)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#fff9c4;strokeColor=#f9a825;fontSize=9;fontStyle=1;fontColor=#f57f17;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="720" y="560" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow_ml_models" value="reads" style="edgeStyle=orthogonalEdgeStyle;rounded=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#f9a825;fontColor=#f57f17;fontSize=9;fontStyle=2;endArrow=open;endFill=0;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="ml_service" target="models_store">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- ARROW: Backend <-> Database (SQL Queries)                    -->
+        <!-- ============================================================ -->
+        <mxCell id="arrow_be_db" value="SQL Queries" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#c62828;fontColor=#c62828;fontSize=10;fontStyle=1;startArrow=classic;endArrow=classic;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="backend" target="database">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- 5. DATABASE (red/pink cylinder)                              -->
+        <!-- ============================================================ -->
+        <mxCell id="database" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="570" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="db_title" value="&lt;b&gt;MySQL 8.0&lt;/b&gt;" style="text;html=1;fontSize=13;align=center;verticalAlign=middle;fontColor=#991b1b;" vertex="1" parent="1">
+          <mxGeometry x="310" y="590" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="db_detail" value="Orders &amp;bull; Products &amp;bull; Customers &amp;bull; Analytics" style="text;html=1;fontSize=8;align=center;verticalAlign=middle;fontColor=#c06060;" vertex="1" parent="1">
+          <mxGeometry x="295" y="612" width="150" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- 6. EXTERNAL: Google Gemini API (purple)                      -->
+        <!-- ============================================================ -->
+        <mxCell id="gemini" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="370" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="gemini_title" value="&lt;b&gt;Google&lt;br&gt;Gemini API&lt;/b&gt;" style="text;html=1;fontSize=11;align=center;verticalAlign=top;fontColor=#6a1b9a;" vertex="1" parent="1">
+          <mxGeometry x="970" y="378" width="100" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="gemini_sub" value="LLM Provider" style="text;html=1;fontSize=9;align=center;verticalAlign=middle;fontColor=#9c64c8;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="975" y="418" width="90" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- ARROW: ML Service -> Gemini (API call) -->
+        <mxCell id="arrow_ml_gemini" value="API" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#9673a6;fontColor=#6a1b9a;fontSize=10;fontStyle=1;endArrow=classic;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="ml_service" target="gemini">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEGEND (bottom-left)                                         -->
+        <!-- ============================================================ -->
+        <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fafafa;strokeColor=#cccccc;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="570" width="210" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" value="&lt;b&gt;Legend&lt;/b&gt;" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="30" y="573" width="60" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#2d6da3;" vertex="1" parent="1">
+          <mxGeometry x="30" y="594" width="16" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1t" value="Frontend (Next.js)" style="text;html=1;fontSize=9;align=left;verticalAlign=middle;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="52" y="592" width="110" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#2d7d3a;" vertex="1" parent="1">
+          <mxGeometry x="30" y="612" width="16" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2t" value="Backend API (PHP)" style="text;html=1;fontSize=9;align=left;verticalAlign=middle;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="52" y="610" width="110" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6940b;" vertex="1" parent="1">
+          <mxGeometry x="30" y="630" width="16" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3t" value="ML Microservice (Python)" style="text;html=1;fontSize=9;align=left;verticalAlign=middle;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="52" y="628" width="130" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="648" width="16" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4t" value="External Service" style="text;html=1;fontSize=9;align=left;verticalAlign=middle;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="52" y="646" width="100" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;size=4;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="30" y="663" width="16" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5t" value="Database (MySQL)" style="text;html=1;fontSize=9;align=left;verticalAlign=middle;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="52" y="662" width="110" height="16" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

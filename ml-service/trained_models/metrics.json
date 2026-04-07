@@ -1,0 +1,230 @@
+{
+  "trained_at": "2026-03-14T00:02:54.245739",
+  "dataset": "crm_database",
+  "source_file": "MySQL cod_crm.orders",
+  "total_orders": 6060,
+  "delivery_rate": 0.8391,
+  "risk_prediction": {
+    "models": {
+      "catboost": {
+        "auc_roc": 0.6503523863946418,
+        "accuracy": 0.8443708609271523,
+        "precision": 0.8439834024896266,
+        "recall": 1.0,
+        "f1_score": 0.9153915391539154
+      },
+      "lightgbm": {
+        "auc_roc": 0.6384036819101453,
+        "accuracy": 0.8443708609271523,
+        "precision": 0.8439834024896266,
+        "recall": 1.0,
+        "f1_score": 0.9153915391539154
+      },
+      "xgboost": {
+        "auc_roc": 0.6406173583118401,
+        "accuracy": 0.8435430463576159,
+        "precision": 0.8432835820895522,
+        "recall": 1.0,
+        "f1_score": 0.9149797570850202
+      },
+      "ensemble": {
+        "auc_roc": 0.6465273594958996,
+        "accuracy": 0.6597682119205298,
+        "precision": 0.89453125,
+        "recall": 0.6755162241887905,
+        "f1_score": 0.7697478991596639
+      }
+    },
+    "optimal_threshold": 0.8154501993826486,
+    "ensemble_weights": {
+      "catboost": 0.33707958108198255,
+      "lightgbm": 0.3308865319191515,
+      "xgboost": 0.33203388699886605
+    },
+    "confusion_matrix_default": {
+      "threshold": 0.5,
+      "tn": 2,
+      "fp": 189,
+      "fn": 0,
+      "tp": 1017
+    },
+    "confusion_matrix_optimal": {
+      "threshold": 0.8154501993826486,
+      "tn": 110,
+      "fp": 81,
+      "fn": 330,
+      "tp": 687
+    },
+    "per_class_metrics": {
+      "at_default_050": {
+        "failed": {
+          "precision": 1.0,
+          "recall": 0.0105,
+          "f1": 0.0207
+        },
+        "delivered": {
+          "precision": 0.8433,
+          "recall": 1.0,
+          "f1": 0.915
+        }
+      },
+      "at_optimal": {
+        "failed": {
+          "precision": 0.25,
+          "recall": 0.5759,
+          "f1": 0.3487
+        },
+        "delivered": {
+          "precision": 0.8945,
+          "recall": 0.6755,
+          "f1": 0.7697
+        }
+      }
+    },
+    "dataset": {
+      "total_samples": 6039,
+      "train_samples": 5413,
+      "test_samples": 1208,
+      "positive_rate": 0.842026825633383,
+      "original_orders": 6060,
+      "clean_orders": 6039,
+      "failure_rate": 0.15797317436661695
+    },
+    "features": [
+      "hour_of_day",
+      "day_of_week",
+      "month",
+      "is_weekend",
+      "day_of_month",
+      "quarter",
+      "order_value",
+      "subtotal",
+      "shipping_cost",
+      "value_to_shipping_ratio",
+      "n_items",
+      "is_repeat_customer",
+      "customer_order_count",
+      "customer_avg_order_value",
+      "has_boleto",
+      "has_credit_card",
+      "has_voucher",
+      "has_debit_card",
+      "n_payment_methods",
+      "max_installments",
+      "avg_photos",
+      "avg_desc_length",
+      "avg_name_length",
+      "avg_volume",
+      "avg_product_weight",
+      "region_order_volume",
+      "seller_customer_same_state",
+      "n_sellers",
+      "category_avg_price",
+      "category_popularity",
+      "estimated_delivery_days"
+    ],
+    "optimizations": {
+      "target": "clean (delivered vs canceled/unavailable)",
+      "resampling": "ADASYN ratio=0.3",
+      "hyperparameters": "Optuna-tuned (auto)",
+      "n_features": 31,
+      "lgbm_params": {
+        "n_estimators": 1137,
+        "max_depth": 6,
+        "learning_rate": 0.0119400123229921,
+        "num_leaves": 80,
+        "subsample": 0.6335432803739602,
+        "colsample_bytree": 0.5076185821359189,
+        "min_child_samples": 100,
+        "reg_alpha": 9.909597332214368,
+        "reg_lambda": 0.018715430129890184
+      }
+    }
+  },
+  "segmentation": {
+    "algorithm": "KMeans",
+    "n_clusters": 4,
+    "total_customers": 400,
+    "silhouette_score": 0.4223,
+    "davies_bouldin_score": 0.8122,
+    "segments": {
+      "At Risk": {
+        "count": 79,
+        "percentage": 19.8,
+        "avg_recency": 108.6,
+        "avg_frequency": 11.37,
+        "avg_monetary": 170350.41
+      },
+      "Regular": {
+        "count": 239,
+        "percentage": 59.8,
+        "avg_recency": 27.1,
+        "avg_frequency": 11.86,
+        "avg_monetary": 159561.09
+      },
+      "Loyal": {
+        "count": 69,
+        "percentage": 17.2,
+        "avg_recency": 28.1,
+        "avg_frequency": 23.99,
+        "avg_monetary": 370573.14
+      },
+      "VIP": {
+        "count": 13,
+        "percentage": 3.2,
+        "avg_recency": 43.5,
+        "avg_frequency": 51.69,
+        "avg_monetary": 756996.85
+      }
+    }
+  },
+  "forecasting": {
+    "models_trained": [
+      "all",
+      "Accessories",
+      "Electronics",
+      "Clothing"
+    ],
+    "method": "lightgbm",
+    "lightgbm": {
+      "mae": 45820.15,
+      "rmse": 53241.7
+    },
+    "baseline_moving_avg": {
+      "mae": 49758.97,
+      "rmse": 58187.93
+    },
+    "improvement_mae_pct": 7.9,
+    "time_series_days": 802,
+    "test_days": 30,
+    "features": [
+      "day_of_week",
+      "month",
+      "is_weekend",
+      "day_of_month",
+      "week_of_year",
+      "ramadan",
+      "eid_al_fitr",
+      "eid_al_adha",
+      "mawlid",
+      "algerian_holiday",
+      "lag_1",
+      "lag_7",
+      "lag_14",
+      "lag_28",
+      "rolling_mean_7",
+      "rolling_mean_14",
+      "rolling_mean_28",
+      "rolling_std_7",
+      "rolling_std_14",
+      "rolling_std_28"
+    ],
+    "islamic_events": [
+      "ramadan",
+      "eid_al_fitr",
+      "eid_al_adha",
+      "mawlid",
+      "algerian_holiday"
+    ]
+  }
+}

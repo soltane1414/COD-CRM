@@ -25,6 +25,7 @@ use App\Modules\Analytics\AnalyticsController;
 use App\Modules\Returns\ReturnController;
 use App\Modules\Admin\AdminController;
 use App\Modules\Storefront\StorefrontController;
+use App\Modules\AIInsights\AIInsightsController;
 
 // ═══════════════════════════════════════════════════════════
 // Health Check
@@ -126,6 +127,18 @@ $router->group('/api/v1', [AuthMiddleware::class, TenantMiddleware::class], func
         $router->get('/products',  [AnalyticsController::class, 'products']);
         $router->get('/returns',   [AnalyticsController::class, 'returns']);
         $router->get('/revenue',   [AnalyticsController::class, 'revenue']);
+    });
+
+    // ── AI Insights (Owner, Admin, Accountant) ──────────────
+    $router->group('/ai', [new RBACMiddleware(['owner', 'admin', 'accountant'])], function ($router) {
+        $router->get('/health',           [AIInsightsController::class, 'health']);
+        $router->get('/order-risk/{id}',  [AIInsightsController::class, 'orderRisk']);
+        $router->get('/segments',         [AIInsightsController::class, 'segments']);
+        $router->get('/forecast',         [AIInsightsController::class, 'forecast']);
+        $router->get('/insights',         [AIInsightsController::class, 'insights']);
+        $router->get('/recommendations',  [AIInsightsController::class, 'recommendations']);
+        $router->post('/retrain',         [AIInsightsController::class, 'retrainFromDatabase'],
+            [new RBACMiddleware(['owner', 'admin'])]);
     });
 });
 

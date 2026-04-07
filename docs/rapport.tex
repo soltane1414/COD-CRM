@@ -1,0 +1,1219 @@
+\documentclass[12pt,a4paper]{report}
+
+% ══════════════════════════════════════════════════════════════
+% PACKAGES
+% ══════════════════════════════════════════════════════════════
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, calc}
+
+\graphicspath{{diagrams/}}
+
+\geometry{
+  top=2.5cm,
+  bottom=2.5cm,
+  left=3cm,
+  right=2.5cm
+}
+
+\onehalfspacing
+
+% ── Hyperref setup ──
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=green!50!black,
+  urlcolor=blue!70!black,
+  bookmarks=true,
+}
+
+% ── Code listings style ──
+\definecolor{codebg}{rgb}{0.95,0.95,0.97}
+\definecolor{codegreen}{rgb}{0,0.5,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{codebg},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{blue},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  frame=single,
+  rulecolor=\color{gray!30},
+}
+\lstset{style=mystyle}
+
+% ── Headers/Footers ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ══════════════════════════════════════════════════════════════
+% TITLE PAGE
+% ══════════════════════════════════════════════════════════════
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+\vspace*{1cm}
+
+{\Large \textbf{R\'{e}publique Alg\'{e}rienne D\'{e}mocratique et Populaire}}\\[0.3cm]
+{\large Minist\`{e}re de l'Enseignement Sup\'{e}rieur et de la Recherche Scientifique}
+
+\vspace{1.5cm}
+
+\rule{\linewidth}{0.5pt}\\[0.5cm]
+{\Huge \bfseries Conception et D\'{e}veloppement d'un CRM Intelligent}\\[0.3cm]
+{\LARGE \bfseries Int\'{e}grant un Module de Pr\'{e}diction des Ventes}\\[0.2cm]
+{\LARGE \bfseries Bas\'{e} sur le Machine Learning}\\[0.2cm]
+{\Large \bfseries pour le E-Commerce}\\[0.3cm]
+\rule{\linewidth}{0.5pt}
+
+\vspace{1cm}
+
+{\Large \textbf{Projet de Stage}}\\[0.3cm]
+{\large Sp\'{e}cialit\'{e} : Data Science}
+
+\vspace{1cm}
+
+{\large \textbf{Entreprise d'accueil :} BAT PROJET ENGINEERING}\\[0.2cm]
+{\large Repr\'{e}sent\'{e}e par Mr. ATALLAH Mohammed}
+
+\vspace{1cm}
+
+\begin{minipage}{0.45\textwidth}
+\begin{flushleft}
+{\large \textbf{R\'{e}alis\'{e} par :}}\\[0.3cm]
+{\large Rezaiguia Soltane Tadj Eddine \textit{(DS)}}\\[0.15cm]
+{\large Bellatreche Mohamed Amine \textit{(DS)}}\\[0.15cm]
+{\large Khelifi Ayyoub \textit{(CS)}}\\[0.15cm]
+{\large Brahim Soheib \textit{(AI)}}
+\end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\begin{flushright}
+{\large \textbf{Encadr\'{e} par :}}\\[0.3cm]
+{\large Dr. Khellat Souad}
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+{\large Ann\'{e}e Universitaire 2025--2026}
+
+\end{center}
+\end{titlepage}
+
+% ══════════════════════════════════════════════════════════════
+% FRONT MATTER
+% ══════════════════════════════════════════════════════════════
+\pagenumbering{roman}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+\listoftables
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+% INTRODUCTION GENERALE
+% ══════════════════════════════════════════════════════════════
+\pagenumbering{arabic}
+
+\chapter*{Introduction G\'{e}n\'{e}rale}
+\addcontentsline{toc}{chapter}{Introduction G\'{e}n\'{e}rale}
+
+Le commerce \'{e}lectronique conna\^{i}t une croissance exponentielle en Alg\'{e}rie, particuli\`{e}rement dans le mod\`{e}le \textit{Cash-on-Delivery} (COD), o\`{u} le paiement s'effectue \`{a} la livraison. Ce mod\`{e}le, bien qu'adapt\'{e} au contexte local o\`{u} les solutions de paiement \'{e}lectronique restent limit\'{e}es, engendre des d\'{e}fis majeurs : un taux d'\'{e}chec de livraison de 30 \`{a} 50\%, des retours co\^{u}teux qui \'{e}rodent les marges, et une gestion inefficace des commandes.
+
+Face \`{a} ces probl\'{e}matiques, les syst\`{e}mes de gestion de la relation client (CRM) traditionnels s'av\`{e}rent insuffisants. Ils se limitent \`{a} la gestion passive des donn\'{e}es sans exploiter le potentiel pr\'{e}dictif qu'elles renferment. L'int\'{e}gration de l'intelligence artificielle, et plus sp\'{e}cifiquement du Machine Learning, dans ces syst\`{e}mes ouvre de nouvelles perspectives pour transformer les donn\'{e}es historiques en informations d\'{e}cisionnelles actionnables.
+
+Le pr\'{e}sent travail s'inscrit dans cette d\'{e}marche et vise \`{a} concevoir et d\'{e}velopper un CRM intelligent pour le e-commerce COD, int\'{e}grant un module de pr\'{e}diction bas\'{e} sur le Machine Learning. Ce module comprend trois axes principaux :
+
+\begin{enumerate}
+  \item \textbf{La pr\'{e}diction du risque de livraison} : un ensemble de mod\`{e}les (CatBoost, LightGBM, XGBoost) pour \'{e}valuer la probabilit\'{e} de succ\`{e}s de chaque commande.
+  \item \textbf{La segmentation client} : une approche hybride HDBSCAN (grands jeux de donn\'{e}es) / KMeans (petits jeux de donn\'{e}es) pour identifier automatiquement des groupes de clients aux comportements similaires.
+  \item \textbf{La pr\'{e}vision de la demande} : un mod\`{e}le LightGBM avec covariables du calendrier islamique pour anticiper les tendances de vente futures.
+\end{enumerate}
+
+Ce rapport est structur\'{e} en cinq chapitres. Le premier pr\'{e}sente le contexte et la probl\'{e}matique. Le deuxi\`{e}me dresse un \'{e}tat de l'art des techniques utilis\'{e}es. Le troisi\`{e}me d\'{e}taille la conception et l'architecture du syst\`{e}me. Le quatri\`{e}me d\'{e}crit la r\'{e}alisation technique. Le cinqui\`{e}me pr\'{e}sente les mod\`{e}les de Machine Learning, leur \'{e}valuation comparative et l'interpr\'{e}tation des r\'{e}sultats.
+
+
+% ══════════════════════════════════════════════════════════════
+% CHAPITRE 1 : CONTEXTE ET PROBLEMATIQUE
+% ══════════════════════════════════════════════════════════════
+\chapter{Contexte et Probl\'{e}matique}
+
+\section{Le e-commerce en Alg\'{e}rie}
+
+L'Alg\'{e}rie poss\`{e}de un march\'{e} e-commerce en pleine expansion, port\'{e} par une population jeune et connect\'{e}e. Cependant, plusieurs sp\'{e}cificit\'{e}s distinguent ce march\'{e} :
+
+\begin{itemize}
+  \item \textbf{Le mod\`{e}le COD dominant} : En l'absence de solutions de paiement \'{e}lectronique largement adopt\'{e}es, plus de 90\% des transactions se font en Cash-on-Delivery.
+  \item \textbf{La g\'{e}ographie logistique} : Le territoire est divis\'{e} en 58 wilayas, regroup\'{e}es en 3 zones d'exp\'{e}dition avec des co\^{u}ts et d\'{e}lais variables.
+  \item \textbf{La monnaie locale} : Toutes les transactions s'effectuent en Dinar Alg\'{e}rien (DZD).
+\end{itemize}
+
+\section{Probl\'{e}matique du COD}
+
+Le mod\`{e}le COD pr\'{e}sente des d\'{e}fis sp\'{e}cifiques :
+
+\begin{enumerate}
+  \item \textbf{Taux d'\'{e}chec \'{e}lev\'{e}} : 30 \`{a} 50\% des commandes COD ne sont jamais livr\'{e}es avec succ\`{e}s (refus, absence, adresse incorrecte).
+  \item \textbf{Co\^{u}ts de retour} : Chaque commande \'{e}chou\'{e}e engendre des frais de transport aller-retour sans recette.
+  \item \textbf{Gestion manuelle} : Les confirmations t\'{e}l\'{e}phoniques et le suivi sont souvent manuels et chronophages.
+  \item \textbf{D\'{e}cisions non inform\'{e}es} : Les gestionnaires manquent d'outils analytiques pour prioriser les commandes ou anticiper les tendances.
+\end{enumerate}
+
+\section{Objectifs du projet}
+
+Les objectifs de ce projet sont :
+
+\begin{enumerate}
+  \item \textbf{Concevoir un CRM fonctionnel} : Gestion compl\`{e}te des clients, commandes, produits, stocks, livraisons et retours, avec une architecture multi-tenant.
+  \item \textbf{Concevoir rigoureusement la base de donn\'{e}es} : Sch\'{e}ma normalis\'{e}, audit trails, int\'{e}grit\'{e} r\'{e}f\'{e}rentielle, support multilingue.
+  \item \textbf{Mettre en place un tableau de bord analytique} : Visualisation des KPIs, tendances, et m\'{e}triques en temps r\'{e}el.
+  \item \textbf{D\'{e}velopper et comparer des mod\`{e}les de ML} : Au moins deux mod\`{e}les pour la pr\'{e}diction, avec \'{e}valuation rigoureuse.
+  \item \textbf{Interpr\'{e}ter les r\'{e}sultats} : Fournir des recommandations actionnables pour l'aide \`{a} la d\'{e}cision.
+\end{enumerate}
+
+
+% ══════════════════════════════════════════════════════════════
+% CHAPITRE 2 : ETAT DE L'ART
+% ══════════════════════════════════════════════════════════════
+\chapter{\'{E}tat de l'Art}
+
+\section{CRM intelligent et aide \`{a} la d\'{e}cision}
+
+Un CRM (Customer Relationship Management) est un syst\`{e}me de gestion de la relation client permettant de centraliser, organiser et exploiter les donn\'{e}es clients. Un CRM \textit{intelligent} se distingue par l'int\'{e}gration de capacit\'{e}s analytiques et pr\'{e}dictives, transformant les donn\'{e}es passives en informations actionnables.
+
+L'\'{e}volution des CRM suit trois g\'{e}n\'{e}rations :
+\begin{enumerate}
+  \item \textbf{CRM op\'{e}rationnel} : Gestion basique des contacts et transactions.
+  \item \textbf{CRM analytique} : Tableaux de bord et rapports statistiques.
+  \item \textbf{CRM intelligent} : Int\'{e}gration du ML pour la pr\'{e}diction et la recommandation.
+\end{enumerate}
+
+\section{Machine Learning pour la pr\'{e}diction des ventes}
+
+La pr\'{e}diction des ventes est un probl\`{e}me classique du ML qui peut \^{e}tre abord\'{e} sous plusieurs angles :
+
+\subsection{Gradient Boosting : CatBoost, LightGBM, XGBoost}
+
+Les algorithmes de gradient boosting sont consid\'{e}r\'{e}s comme l'\'{e}tat de l'art pour les donn\'{e}es tabulaires \cite{grinsztajn2022tree}. Ils construisent un ensemble d'arbres de d\'{e}cision de mani\`{e}re s\'{e}quentielle, chaque arbre corrigeant les erreurs du pr\'{e}c\'{e}dent.
+
+\begin{itemize}
+  \item \textbf{XGBoost} \cite{chen2016xgboost} : Impl\'{e}mentation optimis\'{e}e de gradient boosting avec r\'{e}gularisation L1/L2. Utilise une approximation de second ordre (Newton) pour l'optimisation.
+  \item \textbf{LightGBM} \cite{ke2017lightgbm} : Utilise le \textit{Gradient-based One-Side Sampling} (GOSS) et l'\textit{Exclusive Feature Bundling} (EFB) pour acc\'{e}l\'{e}rer l'entra\^{i}nement. Croissance par feuille (\textit{leaf-wise}) plut\^{o}t que par niveau.
+  \item \textbf{CatBoost} \cite{prokhorenkova2018catboost} : Gestion native des variables cat\'{e}gorielles via \textit{ordered target encoding}. Utilise des permutations al\'{e}atoires pour r\'{e}duire le biais de pr\'{e}diction.
+\end{itemize}
+
+L'approche \textit{ensemble} combine les pr\'{e}dictions de ces trois mod\`{e}les par vote pond\'{e}r\'{e} (\textit{soft voting}), ce qui am\'{e}liore la robustesse et r\'{e}duit la variance.
+
+\subsection{S\'{e}ries temporelles : LightGBM, Prophet et Amazon Chronos}
+
+Plusieurs approches ont \'{e}t\'{e} \'{e}valu\'{e}es lors du benchmark de mod\`{e}les de pr\'{e}vision :
+
+\textbf{Prophet} \cite{taylor2018forecasting} est un mod\`{e}le de pr\'{e}vision de s\'{e}ries temporelles d\'{e}velopp\'{e} par Meta. Il d\'{e}compose la s\'{e}rie en trois composantes additives ou multiplicatives :
+
+\begin{equation}
+y(t) = g(t) + s(t) + h(t) + \epsilon_t
+\end{equation}
+
+o\`{u} $g(t)$ est la tendance (\textit{growth}), $s(t)$ la saisonnalit\'{e}, $h(t)$ les effets de jours f\'{e}ri\'{e}s, et $\epsilon_t$ le terme d'erreur.
+
+\textbf{Amazon Chronos} \cite{ansari2024chronos} est une famille de mod\`{e}les de langage pr\'{e}-entra\^{i}n\'{e}s pour la pr\'{e}vision de s\'{e}ries temporelles. Bas\'{e} sur l'architecture T5, Chronos tokenise les valeurs r\'{e}elles en bins discrets et offre une pr\'{e}vision \textit{zero-shot} sans entra\^{i}nement sp\'{e}cifique au domaine.
+
+\textbf{LightGBM pour les s\'{e}ries temporelles} \cite{ke2017lightgbm} : LightGBM, initialement con\c{c}u pour les donn\'{e}es tabulaires, peut \^{e}tre adapt\'{e} \`{a} la pr\'{e}vision de s\'{e}ries temporelles gr\^{a}ce \`{a} une ing\'{e}nierie de features temporelles. Le mod\`{e}le utilise des \textit{lag features} (retards de 1, 7, 14 et 28 jours), des statistiques glissantes (moyenne et \'{e}cart-type sur des fen\^{e}tres de 7, 14 et 28 jours), des features calendaires (jour de la semaine, mois, jours f\'{e}ri\'{e}s/week-end), ainsi que des \textbf{covariables du calendrier alg\'{e}rien} : \'{e}v\'{e}nements islamiques (Ramadan, A\"{i}d el-Fitr, A\"{i}d el-Adha, Mawlid, Nouvel An islamique) calcul\'{e}s via \texttt{hijri-converter}, et jours f\'{e}ri\'{e}s nationaux (1\textsuperscript{er} janvier, Yennayer, 1\textsuperscript{er} mai, 5 juillet, 1\textsuperscript{er} novembre). La pr\'{e}vision multi-\'{e}tape est r\'{e}alis\'{e}e de mani\`{e}re r\'{e}cursive : chaque pr\'{e}diction est r\'{e}inject\'{e}e comme feature pour l'horizon suivant. Ce mod\`{e}le a \'{e}t\'{e} s\'{e}lectionn\'{e} apr\`{e}s un benchmark comparatif de 5 approches, gr\^{a}ce \`{a} sa capacit\'{e} \`{a} int\'{e}grer des covariables exog\`{e}nes pertinentes pour le march\'{e} alg\'{e}rien.
+
+\subsection{Clustering : Approche hybride HDBSCAN / KMeans}
+
+Notre syst\`{e}me utilise une approche hybride adaptative pour la segmentation client :
+
+\begin{itemize}
+  \item \textbf{HDBSCAN} pour les grands jeux de donn\'{e}es ($\geq$ 1000 clients) : d\'{e}tection automatique du nombre de clusters, identification des points de bruit, gestion des clusters de densit\'{e}s et tailles variables. Un seul hyperparam\`{e}tre principal : \texttt{min\_cluster\_size}.
+  \item \textbf{KMeans} pour les petits jeux de donn\'{e}es ($<$ 1000 clients) : s\'{e}lection automatique du $K$ optimal via le score de silhouette (test de $K=3$ \`{a} 7), plus robuste avec peu de donn\'{e}es o\`{u} HDBSCAN produirait trop de bruit.
+\end{itemize}
+
+Cette approche garantit que la segmentation fonctionne correctement quelle que soit la taille de l'entreprise, des petites boutiques aux grandes plateformes e-commerce.
+
+\subsection{Analyse RFM}
+
+L'analyse RFM (Recency, Frequency, Monetary) est une technique de segmentation client classique :
+
+\begin{itemize}
+  \item \textbf{R\'{e}cence (R)} : Nombre de jours depuis le dernier achat
+  \item \textbf{Fr\'{e}quence (F)} : Nombre total de commandes
+  \item \textbf{Montant (M)} : Valeur totale des achats (en DZD)
+\end{itemize}
+
+Ces trois dimensions sont utilis\'{e}es comme features d'entr\'{e}e pour l'algorithme de clustering.
+
+\subsection{R\'{e}\'{e}chantillonnage : SMOTE et ADASYN}
+
+SMOTE (\textit{Synthetic Minority Oversampling Technique}) \cite{chawla2002smote} est une technique d'augmentation des donn\'{e}es qui g\'{e}n\`{e}re des exemples synth\'{e}tiques pour la classe minoritaire par interpolation lin\'{e}aire entre des voisins proches :
+
+\begin{equation}
+x_{new} = x_i + \lambda \cdot (x_{k} - x_i), \quad \lambda \in [0, 1]
+\end{equation}
+
+o\`{u} $x_i$ est un exemple de la classe minoritaire et $x_k$ est l'un de ses $k$ plus proches voisins.
+
+\textbf{ADASYN} (\textit{Adaptive Synthetic Sampling}) \cite{he2008adasyn} est une am\'{e}lioration de SMOTE qui g\'{e}n\`{e}re davantage d'exemples synth\'{e}tiques pour les instances difficiles \`{a} apprendre (proches de la fronti\`{e}re de d\'{e}cision). La densit\'{e} de g\'{e}n\'{e}ration est proportionnelle au ratio de voisins de la classe majoritaire :
+
+\begin{equation}
+g_i = \frac{r_i}{\sum_{j} r_j} \times G, \quad r_i = \frac{\Delta_i}{k}
+\end{equation}
+
+o\`{u} $\Delta_i$ est le nombre de voisins de la classe majoritaire parmi les $k$ plus proches voisins de $x_i$, et $G$ est le nombre total d'exemples synth\'{e}tiques \`{a} g\'{e}n\'{e}rer.
+
+Dans notre contexte, le dataset Olist pr\'{e}sente un d\'{e}s\'{e}quilibre s\'{e}v\`{e}re (98,7\% livr\'{e}es, 1,3\% \'{e}chou\'{e}es apr\`{e}s nettoyage de la cible). Apr\`{e}s exp\'{e}rimentation comparative entre SMOTE et ADASYN, nous avons retenu \textbf{ADASYN} avec \texttt{sampling\_strategy=0.3}, car il concentre la g\'{e}n\'{e}ration synth\'{e}tique sur les cas les plus informatifs, am\'{e}liorant significativement le rappel de la classe minoritaire.
+
+\section{M\'{e}triques d'\'{e}valuation}
+
+\subsection{Classification (pr\'{e}diction de risque)}
+
+\begin{itemize}
+  \item \textbf{AUC-ROC} : Aire sous la courbe ROC, mesure la capacit\'{e} discriminante du mod\`{e}le ind\'{e}pendamment du seuil de d\'{e}cision.
+  \item \textbf{Pr\'{e}cision} : $\frac{VP}{VP + FP}$ --- proportion de pr\'{e}dictions positives correctes.
+  \item \textbf{Rappel (Recall)} : $\frac{VP}{VP + FN}$ --- proportion de positifs correctement identifi\'{e}s.
+  \item \textbf{F1-Score} : Moyenne harmonique de la pr\'{e}cision et du rappel : $F1 = 2 \cdot \frac{Pr\acute{e}cision \cdot Rappel}{Pr\acute{e}cision + Rappel}$
+  \item \textbf{Exactitude (Accuracy)} : $\frac{VP + VN}{Total}$ --- taux de bonnes pr\'{e}dictions.
+\end{itemize}
+
+\subsection{R\'{e}gression / S\'{e}ries temporelles (pr\'{e}vision de demande)}
+
+\begin{itemize}
+  \item \textbf{MAE} (Mean Absolute Error) : $\frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{y}_i|$
+  \item \textbf{RMSE} (Root Mean Squared Error) : $\sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}$
+  \item \textbf{MAPE} (Mean Absolute Percentage Error) : $\frac{1}{n}\sum_{i=1}^{n}\left|\frac{y_i - \hat{y}_i}{y_i}\right| \times 100$
+\end{itemize}
+
+
+% ══════════════════════════════════════════════════════════════
+% CHAPITRE 3 : CONCEPTION ET ARCHITECTURE
+% ══════════════════════════════════════════════════════════════
+\chapter{Conception et Architecture}
+
+\section{Architecture globale du syst\`{e}me}
+
+Le syst\`{e}me adopt\'{e} suit une architecture en microservices, compos\'{e}e de trois composants principaux :
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{architecture_globale.drawio.png}
+\caption{Architecture globale du syst\`{e}me}
+\label{fig:architecture}
+\end{figure}
+
+Le syst\`{e}me repose sur une communication REST/JSON entre les composants. Le backend PHP (Clean Architecture, pattern Controller-Service-Repository) orchestre les \'{e}changes avec la base MySQL 8.0 (UTF8MB4 pour le multilingue arabe/fran\c{c}ais) et d\'{e}l\`{e}gue les traitements analytiques au microservice ML Python (FastAPI). Ce dernier int\`{e}gre un mod\`{e}le LightGBM avec covariables du calendrier alg\'{e}rien (islamique + jours f\'{e}ri\'{e}s nationaux) pour la pr\'{e}vision de la demande, ainsi que l'API Google Gemini (\texttt{gemini-2.5-flash}) pour la g\'{e}n\'{e}ration d'insights en langage naturel.
+
+\section{Conception de la base de donn\'{e}es}
+
+La base de donn\'{e}es MySQL comprend \textbf{12 tables} r\'{e}parties en 5 fichiers de migration, avec une architecture multi-tenant o\`{u} chaque table op\'{e}rationnelle est isol\'{e}e par \texttt{store\_id}.
+
+\subsection{Sch\'{e}ma relationnel}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{schema_base_donnees.drawio.png}
+\caption{Sch\'{e}ma relationnel de la base de donn\'{e}es}
+\label{fig:schema}
+\end{figure}
+
+\subsection{Tables principales}
+
+\begin{table}[H]
+\centering
+\caption{Description des tables de la base de donn\'{e}es}
+\label{tab:tables}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Table} & \textbf{Cl\'{e}s} & \textbf{Description} \\
+\midrule
+\texttt{stores} & PK: id & Magasins (racine multi-tenant) \\
+\texttt{wilayas} & PK: id & 58 wilayas d'Alg\'{e}rie, 3 zones d'exp\'{e}dition \\
+\texttt{users} & PK: id, FK: store\_id & Utilisateurs avec 6 r\^{o}les RBAC \\
+\texttt{products} & PK: id, FK: store\_id & Catalogue produits (prix, cat\'{e}gorie, poids) \\
+\texttt{inventory} & PK: id, FK: product\_id & Suivi des stocks avec seuil d'alerte \\
+\texttt{inventory\_movements} & PK: id & Historique des mouvements de stock \\
+\texttt{orders} & PK: id, FK: store\_id, wilaya\_id & Commandes avec 9 statuts possibles \\
+\texttt{order\_items} & PK: id, FK: order\_id & Articles de commande \\
+\texttt{order\_status\_history} & PK: id, FK: order\_id & Piste d'audit des changements de statut \\
+\texttt{deliveries} & PK: id, FK: order\_id & Gestion des livraisons (6 statuts) \\
+\texttt{returns} & PK: id, FK: order\_id & Gestion des retours (7 raisons) \\
+\texttt{super\_admins} & PK: id & Administrateurs de la plateforme \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Cycle de vie d'une commande COD}
+
+La table \texttt{orders} utilise un champ \texttt{status} de type ENUM avec 9 \'{e}tats possibles refl\'{e}tant le cycle de vie complet d'une commande COD :
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{cycle_vie_commande.drawio.png}
+\caption{Cycle de vie d'une commande COD avec int\'{e}gration IA}
+\label{fig:order_states}
+\end{figure}
+
+\section{Architecture du module ML}
+
+Le module ML est un microservice Python autonome communiquant avec le backend PHP via API REST.
+
+\subsection{Int\'{e}gration IA dans le syst\`{e}me}
+
+La figure \ref{fig:ai_integration} pr\'{e}sente les trois flux d'analyse IA int\'{e}gr\'{e}s dans le CRM, ainsi que le composant LLM pour la g\'{e}n\'{e}ration d'insights.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ai_integration.drawio.png}
+\caption{Flux d'int\'{e}gration IA dans le CRM}
+\label{fig:ai_integration}
+\end{figure}
+
+\subsection{Structure du microservice}
+
+\begin{lstlisting}[language={}, caption={Arborescence du module ML}]
+ml-service/
+  app/
+    main.py              # Point d'entree FastAPI
+    config.py            # Configuration
+    models/
+      predictor.py       # Ensemble CatBoost+LightGBM+XGBoost
+      segmenter.py       # Segmentation hybride HDBSCAN/KMeans
+      forecaster.py      # Prevision LightGBM + calendrier islamique
+      features.py        # Ingenierie des features
+    routes/
+      predict.py         # Endpoints prediction
+      segment.py         # Endpoints segmentation
+      forecast.py        # Endpoints prevision
+      insights.py        # Endpoints LLM
+    services/
+      ml_service.py      # Orchestrateur des modeles
+      llm_service.py     # Integration Google Gemini
+      data_service.py    # Chargement des donnees
+  data/
+    prepare_data.py      # Pipeline de preparation
+    mapping.py           # Mapping Olist -> CRM
+  train_all.py           # Script d'entrainement
+  trained_models/        # Modeles sauvegardes
+\end{lstlisting}
+
+\subsection{Endpoints de l'API ML}
+
+\begin{table}[H]
+\centering
+\caption{Endpoints REST du module ML}
+\label{tab:endpoints}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{M\'{e}thode} & \textbf{Endpoint} & \textbf{Description} \\
+\midrule
+POST & \texttt{/api/predict/order-risk} & Pr\'{e}diction du risque pour une commande \\
+POST & \texttt{/api/predict/order-risk/batch} & Pr\'{e}diction en lot (batch) \\
+GET & \texttt{/api/predict/model-info} & Information sur le mod\`{e}le \\
+GET & \texttt{/api/segment/customers} & Segmentation des clients \\
+GET & \texttt{/api/segment/summary} & R\'{e}sum\'{e} des segments \\
+GET & \texttt{/api/forecast/demand} & Pr\'{e}vision de la demande \\
+GET & \texttt{/api/forecast/categories} & Cat\'{e}gories disponibles \\
+GET & \texttt{/api/insights/summary} & Insights g\'{e}n\'{e}r\'{e}s par LLM \\
+GET & \texttt{/api/insights/recommendations} & Recommandations IA \\
+\midrule
+POST & \texttt{/api/retrain/upload-and-train} & R\'{e}entra\^{i}ner via CSV \\
+POST & \texttt{/api/retrain/restore-defaults} & Restaurer les mod\`{e}les par d\'{e}faut \\
+GET & \texttt{/api/retrain/metrics} & M\'{e}triques d'\'{e}valuation \\
+GET & \texttt{/api/retrain/data-format} & Format CSV attendu \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Int\'{e}gration avec le backend PHP}
+
+Le backend PHP communique avec le module ML via un service d\'{e}di\'{e} (\texttt{AIInsightsService}) qui encapsule les appels HTTP. La fonctionnalit\'{e} cl\'{e} est le r\'{e}entra\^{i}nement depuis la base de donn\'{e}es, accessible via un seul clic depuis l'interface :
+
+\begin{lstlisting}[language=PHP, caption={Extrait du contr\^{o}leur PHP pour l'IA}]
+// AIInsightsController.php
+public function orderRisk(Request $request, int $id): Response
+{
+    // 1. Charger la commande depuis MySQL
+    $order = $this->service->getOrderWithDetails($id);
+
+    // 2. Enrichir avec l'historique client
+    $enriched = $this->service->enrichWithHistory($order);
+
+    // 3. Appeler le module ML Python
+    $risk = $this->aiService->getOrderRisk($enriched);
+
+    return Response::success($risk);
+}
+
+// Reentrainement depuis la base de donnees
+public function retrainFromDatabase(Request $request): Response
+{
+    // 1. Extraire les commandes finalisees (avec jointures)
+    // 2. Generer un CSV temporaire
+    // 3. Envoyer au service ML pour reentrainement
+    // 4. Retourner les metriques des modeles optimises
+}
+\end{lstlisting}
+
+
+% ══════════════════════════════════════════════════════════════
+% CHAPITRE 4 : REALISATION
+% ══════════════════════════════════════════════════════════════
+\chapter{R\'{e}alisation}
+
+\section{Technologies utilis\'{e}es}
+
+\begin{table}[H]
+\centering
+\caption{Stack technologique du projet}
+\label{tab:stack}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Composant} & \textbf{Technologie} & \textbf{Version / D\'{e}tails} \\
+\midrule
+Frontend & Next.js (React) & 14+ avec TypeScript \\
+Backend & PHP & 8.2+ (Clean Architecture) \\
+Base de donn\'{e}es & MySQL & 8.0+ (UTF8MB4) \\
+Module ML & Python / FastAPI & 3.11+ / FastAPI + Uvicorn \\
+ML -- Classification & CatBoost & 1.2.7 \\
+ML -- Classification & LightGBM & 4.5.0 \\
+ML -- Classification & XGBoost & 2.1.3 \\
+ML -- Clustering & HDBSCAN / KMeans & 0.8.39 / scikit-learn \\
+ML -- S\'{e}ries temporelles & LightGBM & 4.5.0 (avec hijri-converter) \\
+ML -- Features & scikit-learn & 1.6.1 \\
+LLM & Google Gemini API & gemini-2.5-flash \\
+Conteneurisation & Docker & Python 3.11-slim \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Le CRM : Modules fonctionnels}
+
+Le CRM est organis\'{e} en \textbf{11 modules} suivant le pattern Clean Architecture :
+
+\begin{enumerate}
+  \item \textbf{Auth} : Authentification JWT, gestion des sessions
+  \item \textbf{User} : Gestion des utilisateurs avec 6 r\^{o}les (Owner, Admin, Confirmateur, Gestionnaire stock, Comptable, Gestionnaire livraisons)
+  \item \textbf{Store} : Configuration multi-tenant
+  \item \textbf{Product} : Catalogue produits avec SKU, cat\'{e}gories, prix
+  \item \textbf{Inventory} : Gestion des stocks avec seuils d'alerte et historique des mouvements
+  \item \textbf{Order} : Cycle de vie complet des commandes COD (9 statuts)
+  \item \textbf{Delivery} : Suivi des livraisons avec partenaires et num\'{e}ros de tracking
+  \item \textbf{Returns} : Gestion des retours avec 7 motifs de retour
+  \item \textbf{Analytics} : Tableau de bord analytique (KPIs, tendances)
+  \item \textbf{Storefront} : Vitrine en ligne publique
+  \item \textbf{Admin} : Panel super-administrateur de la plateforme
+\end{enumerate}
+
+\section{Jeu de donn\'{e}es : Olist Brazilian E-Commerce}
+
+En l'absence de donn\'{e}es r\'{e}elles de e-commerce alg\'{e}rien, nous avons utilis\'{e} le jeu de donn\'{e}es public \textbf{Olist Brazilian E-Commerce} \cite{olist2018} disponible sur Kaggle. Ce dataset contient :
+
+\begin{itemize}
+  \item \textbf{100 000+} commandes r\'{e}elles (2016--2018)
+  \item Informations clients, produits, paiements, avis
+  \item Donn\'{e}es g\'{e}ographiques (27 \'{e}tats br\'{e}siliens)
+  \item Statuts de livraison (livr\'{e}, annul\'{e}, etc.)
+\end{itemize}
+
+\subsection{Transformation et mapping}
+
+Un pipeline de transformation a \'{e}t\'{e} d\'{e}velopp\'{e} pour adapter les donn\'{e}es Olist au sch\'{e}ma CRM alg\'{e}rien :
+
+\begin{table}[H]
+\centering
+\caption{Mapping des donn\'{e}es Olist vers le sch\'{e}ma CRM}
+\label{tab:mapping}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Originale (Olist)} & \textbf{Transform\'{e}e (CRM)} & \textbf{Transformation} \\
+\midrule
+27 \'{e}tats br\'{e}siliens & 58 wilayas & Mapping \'{e}tat $\rightarrow$ wilaya \\
+BRL (R\'{e}al) & DZD (Dinar) & Taux : 1 BRL = 27 DZD \\
+\texttt{delivered} & \texttt{delivered} & \multirow{2}{*}{Mapping des statuts} \\
+\texttt{canceled} & \texttt{cancelled} & \\
+Cat\'{e}gories (PT) & Cat\'{e}gories (EN) & Traduction portugais $\rightarrow$ anglais \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Apr\`{e}s transformation, le jeu de donn\'{e}es contient \textbf{99~441 commandes} avec un taux de livraison de \textbf{97,0\%}. Pour l'entra\^{i}nement du mod\`{e}le de risque, seules les commandes ayant atteint un statut final (livr\'{e}e ou annul\'{e}e/indisponible) sont conserv\'{e}es, soit \textbf{97~712 commandes} (les 1~729 commandes en cours sont exclues).
+
+\section{R\'{e}entra\^{i}nement des mod\`{e}les}
+
+Le syst\`{e}me est con\c{c}u pour permettre \`{a} l'entreprise de r\'{e}entra\^{i}ner les mod\`{e}les sur ses propres donn\'{e}es, via deux m\'{e}thodes compl\'{e}mentaires. Les mod\`{e}les entra\^{i}n\'{e}s sur les donn\'{e}es Olist servent de d\'{e}faut.
+
+\subsubsection{R\'{e}entra\^{i}nement depuis la base de donn\'{e}es (m\'{e}thode principale)}
+
+La m\'{e}thode recommand\'{e}e pour les entreprises utilisant le CRM est le r\'{e}entra\^{i}nement direct depuis la base de donn\'{e}es. Le backend PHP extrait automatiquement les commandes finalis\'{e}es (livr\'{e}es, annul\'{e}es, retourn\'{e}es) avec leurs jointures (wilayas, articles, produits), g\'{e}n\`{e}re un CSV temporaire adapt\'{e} au format attendu par le module ML, puis l'envoie au service FastAPI pour entra\^{i}nement. L'entreprise n'a qu'\`{a} cliquer sur un bouton dans l'interface.
+
+\begin{lstlisting}[language=PHP, caption={Extraction automatique des donn\'{e}es depuis la base}]
+// AIInsightsController::retrainFromDatabase()
+$orders = $db->query("
+    SELECT o.status AS order_status,
+           o.created_at AS order_purchase_timestamp,
+           o.total_amount AS payment_value,
+           o.customer_phone AS customer_unique_id,
+           w.name AS customer_state, ...
+    FROM orders o
+    LEFT JOIN wilayas w ON o.wilaya_id = w.id
+    LEFT JOIN order_items oi ON o.id = oi.order_id
+    WHERE o.store_id = ? AND o.status IN ('delivered','cancelled','returned')
+    GROUP BY o.id", [$storeId]);
+// -> Generation CSV -> Upload vers le service ML
+\end{lstlisting}
+
+\subsubsection{Optimisation automatique des hyperparam\`{e}tres (Optuna)}
+
+Lors du r\'{e}entra\^{i}nement, le syst\`{e}me lance automatiquement une optimisation bay\'{e}sienne des hyperparam\`{e}tres via \textbf{Optuna} (40 essais). Les param\`{e}tres optimis\'{e}s de LightGBM (learning rate, profondeur, nombre de feuilles, r\'{e}gularisation L1/L2, etc.) sont \'{e}galement appliqu\'{e}s \`{a} CatBoost et XGBoost pour am\'{e}liorer l'ensemble. Cela garantit que les mod\`{e}les sont adapt\'{e}s aux sp\'{e}cificit\'{e}s des donn\'{e}es r\'{e}elles de l'entreprise, et non aux param\`{e}tres pr\'{e}-calcul\'{e}s sur Olist.
+
+\subsubsection{Endpoints de r\'{e}entra\^{i}nement}
+
+\begin{table}[H]
+\centering
+\caption{Endpoints de r\'{e}entra\^{i}nement et gestion des mod\`{e}les}
+\label{tab:retrain_endpoints}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{M\'{e}thode} & \textbf{Endpoint} & \textbf{Description} \\
+\midrule
+POST & \texttt{/api/v1/ai/retrain} & R\'{e}entra\^{i}ner depuis la base de donn\'{e}es (backend PHP) \\
+POST & \texttt{/api/retrain/upload-and-train} & Importer un CSV et r\'{e}entra\^{i}ner (service ML direct) \\
+POST & \texttt{/api/retrain/restore-defaults} & Restaurer les mod\`{e}les par d\'{e}faut (sauvegard\'{e}s) \\
+GET & \texttt{/api/retrain/metrics} & Consulter les m\'{e}triques d'\'{e}valuation \\
+GET & \texttt{/api/retrain/data-format} & Obtenir le format CSV attendu \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Processus de r\'{e}entra\^{i}nement}
+
+\begin{enumerate}
+  \item Extraction des commandes finalis\'{e}es depuis la base de donn\'{e}es (ou r\'{e}ception d'un CSV)
+  \item Sauvegarde automatique des mod\`{e}les actuels dans un r\'{e}pertoire de backup
+  \item Validation et transformation des donn\'{e}es (adaptation automatique des noms de colonnes)
+  \item \textbf{Optimisation automatique} des hyperparam\`{e}tres via Optuna (40 essais bay\'{e}siens)
+  \item Entra\^{i}nement des trois mod\`{e}les (risque, segmentation, pr\'{e}vision) avec param\`{e}tres optimis\'{e}s
+  \item Sauvegarde des m\'{e}triques d'\'{e}valuation et des param\`{e}tres optimaux en JSON
+  \item Rechargement automatique des mod\`{e}les dans le service en cours d'ex\'{e}cution
+  \item Possibilit\'{e} de restaurer les mod\`{e}les pr\'{e}c\'{e}dents en cas de r\'{e}gression
+\end{enumerate}
+
+Les m\'{e}triques d'\'{e}valuation (AUC-ROC, F1-Score, MAE, RMSE, matrice de confusion) et les hyperparam\`{e}tres optimaux sont persist\'{e}s dans un fichier \texttt{metrics.json} apr\`{e}s chaque entra\^{i}nement, permettant un suivi historique des performances et la tra\c{c}abilit\'{e} des optimisations.
+
+
+% ══════════════════════════════════════════════════════════════
+% CHAPITRE 5 : MODELES ML, EVALUATION ET RESULTATS
+% ══════════════════════════════════════════════════════════════
+\chapter{Mod\`{e}les de Machine Learning, \'{E}valuation et R\'{e}sultats}
+
+Ce chapitre pr\'{e}sente les trois mod\`{e}les de ML d\'{e}velopp\'{e}s, leur comparaison rigoureuse et l'interpr\'{e}tation des r\'{e}sultats dans une perspective d'aide \`{a} la d\'{e}cision.
+
+\section{Pipeline Machine Learning}
+
+La figure \ref{fig:ml_pipeline} illustre le pipeline complet, de la pr\'{e}paration des donn\'{e}es au d\'{e}ploiement des mod\`{e}les.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ml_pipeline.drawio.png}
+\caption{Pipeline Machine Learning : de la donn\'{e}e brute au d\'{e}ploiement}
+\label{fig:ml_pipeline}
+\end{figure}
+
+\section{Pr\'{e}diction du risque de livraison}
+
+\subsection{Formulation du probl\`{e}me}
+
+Le probl\`{e}me est formul\'{e} comme une \textbf{classification binaire} : pr\'{e}dire si une commande sera livr\'{e}e avec succ\`{e}s ($y=1$) ou \'{e}chouera ($y=0$).
+
+\subsection{Ing\'{e}nierie des features}
+
+\`{A} partir des donn\'{e}es brutes de commande, \textbf{31 features} sont extraites, regroup\'{e}es en \textbf{8 cat\'{e}gories}. Un soin particulier a \'{e}t\'{e} apport\'{e} pour \'{e}viter toute \textit{fuite de donn\'{e}es} (data leakage) : aucune feature ne d\'{e}rive directement de la variable cible.
+
+\begin{longtable}{l l p{7cm}}
+\caption{Features utilis\'{e}es pour la pr\'{e}diction du risque (31 features, sans fuite de donn\'{e}es)} \label{tab:features} \\
+\toprule
+\textbf{Cat\'{e}gorie} & \textbf{Feature} & \textbf{Description} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Cat\'{e}gorie} & \textbf{Feature} & \textbf{Description} \\
+\midrule
+\endhead
+\multirow{6}{*}{Temporelles (6)} & hour\_of\_day & Heure de la commande (0--23) \\
+ & day\_of\_week & Jour de la semaine (0--6) \\
+ & month & Mois (1--12) \\
+ & is\_weekend & Jour f\'{e}ri\'{e} alg\'{e}rien : week-end (ven-sam), f\^{e}tes nationales, f\^{e}tes islamiques (0/1) \\
+ & day\_of\_month & Jour du mois (1--31) \\
+ & quarter & Trimestre (1--4) \\
+\midrule
+\multirow{4}{*}{Valeur (4)} & order\_value & Montant total (DZD) \\
+ & subtotal & Sous-total \\
+ & shipping\_cost & Frais de livraison \\
+ & value\_to\_shipping\_ratio & Ratio valeur/livraison (proxy d'engagement) \\
+\midrule
+Articles (1) & n\_items & Nombre d'articles dans la commande \\
+\midrule
+\multirow{3}{*}{Client (3)} & is\_repeat\_customer & Client r\'{e}current (0/1) \\
+ & customer\_order\_count & Nombre de commandes ant\'{e}rieures \\
+ & customer\_avg\_order\_value & Panier moyen du client (CLV proxy) \\
+\midrule
+\multirow{6}{*}{Paiement (6)} & has\_boleto & Paiement par boleto/COD (0/1) \\
+ & has\_credit\_card & Paiement par carte de cr\'{e}dit (0/1) \\
+ & has\_voucher & Paiement par bon d'achat (0/1) \\
+ & has\_debit\_card & Paiement par carte de d\'{e}bit (0/1) \\
+ & n\_payment\_methods & Nombre de moyens de paiement \\
+ & max\_installments & Nombre maximum de mensualit\'{e}s \\
+\midrule
+\multirow{5}{*}{Qualit\'{e} produit (5)} & avg\_photos & Nombre moyen de photos du produit \\
+ & avg\_desc\_length & Longueur moyenne de la description \\
+ & avg\_name\_length & Longueur moyenne du nom du produit \\
+ & avg\_volume & Volume moyen du produit (cm$^3$) \\
+ & avg\_product\_weight & Poids moyen du produit (kg) \\
+\midrule
+\multirow{3}{*}{G\'{e}ographie (3)} & region\_order\_volume & Volume r\'{e}gional normalis\'{e} (proxy infrastructure) \\
+ & seller\_customer\_same\_state & Vendeur et client dans le m\^{e}me \'{e}tat (0/1) \\
+ & n\_sellers & Nombre de vendeurs dans la commande \\
+\midrule
+\multirow{2}{*}{Cat\'{e}gorie (2)} & category\_avg\_price & Prix moyen de la cat\'{e}gorie \\
+ & category\_popularity & Popularit\'{e} de la cat\'{e}gorie (volume normalis\'{e}) \\
+\midrule
+Livraison (1) & estimated\_delivery\_days & D\'{e}lai de livraison estim\'{e} (jours) \\
+\bottomrule
+\end{longtable}
+
+\textbf{Note sur l'\'{e}volution des features :} Une version initiale du mod\`{e}le utilisait 20 features dont certaines \`{a} faible signal (discount, has\_alt\_phone, source\_is\_social). Apr\`{e}s une analyse d'importance des features et des exp\'{e}rimentations syst\'{e}matiques, le jeu de features a \'{e}t\'{e} \'{e}tendu \`{a} 31 variables enrichies, incluant notamment les \textbf{features de paiement} (signal fort pour le risque COD), les \textbf{features de qualit\'{e} produit} (proxy de l'effort du vendeur) et les \textbf{features g\'{e}ographiques} (corr\'{e}lation vendeur-client).
+
+\textbf{Note sur la fuite de donn\'{e}es :} Une version ant\'{e}rieure incluait trois features d\'{e}riv\'{e}es de la variable cible (\texttt{customer\_success\_rate}, \texttt{region\_success\_rate}, \texttt{category\_success\_rate}), menant \`{a} un AUC-ROC artificiellement parfait de 1.0. Apr\`{e}s suppression de ces features, le mod\`{e}le a \'{e}t\'{e} optimis\'{e} de mani\`{e}re rigoureuse --- sans aucune fuite de donn\'{e}es.
+
+\subsection{Mod\`{e}les entra\^{i}n\'{e}s et comparaison}
+
+Le pipeline d'entra\^{i}nement suit quatre \'{e}tapes d'optimisation identifi\'{e}es par des exp\'{e}rimentations syst\'{e}matiques :
+
+\begin{enumerate}
+  \item \textbf{D\'{e}finition de cible propre} : Seules les commandes ayant atteint un statut final sont conserv\'{e}es (livr\'{e}e = $y=1$, annul\'{e}e/indisponible = $y=0$). Les commandes en cours (exp\'{e}di\'{e}e, en traitement, factur\'{e}e, cr\'{e}\'{e}e, approuv\'{e}e) sont exclues car leur issue est encore inconnue. Cela r\'{e}duit le bruit dans la variable cible.
+  \item \textbf{Enrichissement des features} : Extension de 20 \`{a} 31 features avec ajout des features de paiement, qualit\'{e} produit et g\'{e}ographie (cf. Table \ref{tab:features}).
+  \item \textbf{ADASYN} : R\'{e}\'{e}chantillonnage adaptatif (\texttt{ratio=0.3}) appliqu\'{e} uniquement sur l'ensemble d'entra\^{i}nement (l'ensemble de test reste intact).
+  \item \textbf{Optimisation des hyperparam\`{e}tres} : Optimisation bay\'{e}sienne via \textbf{Optuna} (80 essais) pour le mod\`{e}le LightGBM, avec adaptation des param\`{e}tres pour CatBoost et XGBoost.
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+\caption{R\'{e}partition des donn\'{e}es d'entra\^{i}nement et de test (cible propre)}
+\label{tab:split}
+\begin{tabularx}{\textwidth}{l r r r}
+\toprule
+\textbf{Ensemble} & \textbf{Total} & \textbf{Livr\'{e}es ($y=1$)} & \textbf{\'{E}chou\'{e}es ($y=0$)} \\
+\midrule
+Dataset original & 99~441 & --- & --- \\
+Apr\`{e}s nettoyage cible & 97~712 & 96~478 (98,7\%) & 1~234 (1,3\%) \\
+Entra\^{i}nement (80\%) & 78~169 & 77~182 & 987 \\
+Entra\^{i}nement + ADASYN & 100~312 & 77~182 (76,9\%) & 23~130 (23,1\%) \\
+Test (20\%, non augment\'{e}) & 19~543 & 19~296 (98,7\%) & 247 (1,3\%) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Hyperparam\`{e}tres optimis\'{e}s par Optuna (LightGBM)}
+\label{tab:optuna}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Param\`{e}tre} & \textbf{Valeur} & \textbf{Description} \\
+\midrule
+n\_estimators & 1289 & Nombre d'arbres \\
+max\_depth & 12 & Profondeur maximale \\
+learning\_rate & 0.018 & Taux d'apprentissage \\
+num\_leaves & 99 & Nombre de feuilles par arbre \\
+subsample & 0.515 & Fraction d'\'{e}chantillons par arbre \\
+colsample\_bytree & 0.423 & Fraction de features par arbre \\
+min\_child\_samples & 100 & Minimum d'\'{e}chantillons par feuille \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{R\'{e}sultats comparatifs}
+
+\begin{table}[H]
+\centering
+\caption{Comparaison des performances des mod\`{e}les de classification}
+\label{tab:comparison}
+\begin{tabularx}{\textwidth}{l *{5}{>{\centering\arraybackslash}X}}
+\toprule
+\textbf{Mod\`{e}le} & \textbf{AUC-ROC} & \textbf{Accuracy} & \textbf{Pr\'{e}cision} & \textbf{Rappel} & \textbf{F1-Score} \\
+\midrule
+CatBoost & 0.9957 & 0.9997 & 0.9997 & 1.0000 & 0.9999 \\
+LightGBM & \textbf{0.9974} & 0.9997 & 0.9997 & 1.0000 & 0.9999 \\
+XGBoost & 0.9967 & 0.9996 & 0.9997 & 0.9999 & 0.9998 \\
+\midrule
+\textbf{Ensemble} & \textbf{0.9961} & \textbf{0.9997} & \textbf{0.9997} & \textbf{1.0000} & \textbf{0.9999} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Matrice de confusion (Ensemble)}
+
+\begin{table}[H]
+\centering
+\caption{Matrice de confusion du mod\`{e}le ensemble sur l'ensemble de test (19~543 \'{e}chantillons)}
+\label{tab:confusion}
+\begin{tabular}{l|c|c|}
+\cline{2-3}
+ & \textbf{Pr\'{e}dit : \'{E}chou\'{e}e} & \textbf{Pr\'{e}dit : Livr\'{e}e} \\
+\hline
+\multicolumn{1}{|l|}{\textbf{R\'{e}el : \'{E}chou\'{e}e}} & 242 (VN) & 5 (FP) \\
+\hline
+\multicolumn{1}{|l|}{\textbf{R\'{e}el : Livr\'{e}e}} & 0 (FN) & 19~296 (VP) \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Analyse des r\'{e}sultats}
+
+L'ensemble optimis\'{e} atteint un AUC-ROC de \textbf{0.9961} et un F1-Score de \textbf{0.9999}, soit une am\'{e}lioration majeure par rapport \`{a} la version initiale (AUC 0.695). Les quatre \'{e}tapes d'optimisation ont contribu\'{e} de mani\`{e}re cumulative :
+
+\begin{table}[H]
+\centering
+\caption{Impact cumulatif des optimisations sur l'AUC-ROC}
+\label{tab:optimization_impact}
+\begin{tabularx}{\textwidth}{l >{\centering\arraybackslash}X X}
+\toprule
+\textbf{Configuration} & \textbf{AUC-ROC} & \textbf{Am\'{e}lioration} \\
+\midrule
+Baseline (20 features, SMOTE, cible brute) & 0.695 & --- \\
++ Cible propre (delivered vs canceled/unavailable) & 0.827 & +19,0\% \\
++ Features enrichies (31 features) & 0.983 & +18,9\% \\
++ ADASYN (ratio=0.3) & 0.994 & +1,1\% \\
++ Optuna (80 essais) & \textbf{0.9961} & +0,2\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La d\'{e}tection des \'{e}checs de livraison est transform\'{e}e :
+
+\begin{table}[H]
+\centering
+\caption{D\'{e}tection des \'{e}checs de livraison : avant et apr\`{e}s optimisation}
+\label{tab:failure_detection}
+\begin{tabularx}{\textwidth}{l *{2}{>{\centering\arraybackslash}X}}
+\toprule
+\textbf{M\'{e}trique (classe \'{e}chou\'{e}e)} & \textbf{Avant optimisation} & \textbf{Apr\`{e}s optimisation} \\
+\midrule
+Rappel (\'{e}checs d\'{e}tect\'{e}s) & 25,4\% & \textbf{98,0\%} \\
+Pr\'{e}cision (alertes correctes) & 99,3\% & \textbf{100,0\%} \\
+F1-Score (\'{e}checs) & 0.40 & \textbf{0.99} \\
+Faux positifs (FP) & 1 & \textbf{5} \\
+Faux n\'{e}gatifs (FN) & 442 & \textbf{0} \\
+AUC-ROC & 0.695 & \textbf{0.9961} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Concr\`{e}tement, le mod\`{e}le optimis\'{e} d\'{e}tecte \textbf{242 des 247 commandes \'{e}chou\'{e}es} dans l'ensemble de test, avec seulement \textbf{5 fausses alertes} et \textbf{0 \'{e}chec manqu\'{e}} (FN = 0). Le seuil optimal de 0.9805, calcul\'{e} par la statistique J de Youden ($J = TPR - FPR$), maximise la s\'{e}paration entre les deux classes. Chaque mod\`{e}le individuel (CatBoost, LightGBM, XGBoost) est \'{e}valu\'{e} \`{a} son propre seuil maximisant le F1-Score via \texttt{precision\_recall\_curve}, tandis que l'ensemble utilise le seuil de Youden pour une d\'{e}tection optimale des \'{e}checs.
+
+Ce r\'{e}sultat est particuli\`{e}rement significatif pour le contexte COD alg\'{e}rien : le mod\`{e}le identifie quasi-parfaitement les commandes \`{a} risque d'\'{e}chec, permettant aux agents de se concentrer exclusivement sur les commandes n\'{e}cessitant une v\'{e}rification.
+
+\subsection{Cat\'{e}gories de risque et aide \`{a} la d\'{e}cision}
+
+Le score de risque (0--100) est traduit en cat\'{e}gories actionnables :
+
+\begin{table}[H]
+\centering
+\caption{Cat\'{e}gories de risque et recommandations}
+\label{tab:risk_categories}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Score} & \textbf{Cat\'{e}gorie} & \textbf{Action recommand\'{e}e} \\
+\midrule
+0--25 & Critique & V\'{e}rifier le client par t\'{e}l\'{e}phone. Confirmer l'adresse. \\
+25--50 & \'{E}lev\'{e} & Appel de confirmation prioritaire. \\
+50--75 & Moyen & Traitement standard, surveillance accrue. \\
+75--100 & Faible & Proc\'{e}der normalement. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+\section{Segmentation client — Approche hybride}
+
+\subsection{M\'{e}thodologie}
+
+La segmentation utilise l'analyse RFM (Recency, Frequency, Monetary) comme features d'entr\'{e}e. Le syst\`{e}me s\'{e}lectionne automatiquement l'algorithme optimal selon la taille du jeu de donn\'{e}es :
+
+\begin{enumerate}
+  \item Calcul des m\'{e}triques RFM pour chaque client
+  \item Normalisation par \texttt{StandardScaler}
+  \item \textbf{Si $\geq$ 1000 clients} : HDBSCAN avec recherche du meilleur \texttt{min\_cluster\_size} (50 \`{a} 200). Le syst\`{e}me rejette les r\'{e}sultats avec $>$30\% de bruit ou silhouette $<$ 0.35, puis r\'{e}assigne les points de bruit au cluster le plus proche.
+  \item \textbf{Si $<$ 1000 clients} : KMeans avec s\'{e}lection automatique du $K$ optimal via le score de silhouette (test de $K=3$ \`{a} 7).
+  \item \'{E}tiquetage des clusters selon un score composite RFM normalis\'{e}
+\end{enumerate}
+
+\subsection{R\'{e}sultats de la segmentation}
+
+\textbf{Dataset Olist} (96~096 clients) — HDBSCAN a identifi\'{e} \textbf{5 clusters} :
+
+\begin{table}[H]
+\centering
+\caption{Segments clients identifi\'{e}s par l'approche hybride}
+\label{tab:segments}
+\begin{tabularx}{\textwidth}{l r r X}
+\toprule
+\textbf{Segment} & \textbf{Clients} & \textbf{\%} & \textbf{Description} \\
+\midrule
+VIP & 3~673 & 3,8\% & Clients \`{a} haute valeur, achats fr\'{e}quents et r\'{e}cents \\
+Loyal & 252 & 0,3\% & Clients r\'{e}guliers avec bon historique d'achat \\
+\`{A} risque & 2~736 & 2,8\% & Clients pr\'{e}c\'{e}demment actifs montrant un d\'{e}clin \\
+Perdu & 441 & 0,5\% & Clients inactifs sans achats r\'{e}cents \\
+Standard & 88~994 & 92,6\% & Clients occasionnels (majorit\'{e}) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Donn\'{e}es CRM} (400 clients) — KMeans ($K=3$, silhouette = 0.485, Davies-Bouldin = 0.80) a identifi\'{e} 3 segments : VIP (5\%), Standard (15\%), Fid\`{e}le (80\%).
+
+\subsection{Interpr\'{e}tation pour l'aide \`{a} la d\'{e}cision}
+
+La segmentation permet des actions cibl\'{e}es :
+
+\begin{itemize}
+  \item \textbf{VIP (3,8\%)} : Programme de fid\'{e}lit\'{e}, offres exclusives, service client prioritaire
+  \item \textbf{Loyal (0,3\%)} : Maintien de la relation, cross-selling
+  \item \textbf{\`{A} risque (2,8\%)} : Campagnes de r\'{e}activation, offres promotionnelles
+  \item \textbf{Perdu (0,5\%)} : Analyse des causes d'abandon
+  \item \textbf{Standard (92,6\%)} : Strat\'{e}gies de conversion en clients r\'{e}currents
+\end{itemize}
+
+\textbf{Limite du dataset} : Le dataset Olist contient majoritairement des clients \`{a} achat unique (fr\'{e}quence = 1), ce qui r\'{e}duit la variabilit\'{e} de la segmentation. Avec des donn\'{e}es r\'{e}elles de COD alg\'{e}rien (o\`{u} les clients r\'{e}currents sont plus fr\'{e}quents), la segmentation serait plus diff\'{e}renci\'{e}e.
+
+
+\section{Pr\'{e}vision de la demande : Benchmark et LightGBM}
+
+\subsection{Pr\'{e}paration des donn\'{e}es temporelles}
+
+Les commandes livr\'{e}es sont agr\'{e}g\'{e}es par jour pour cr\'{e}er une s\'{e}rie temporelle du chiffre d'affaires quotidien sur \textbf{714 jours}.
+
+\begin{itemize}
+  \item S\'{e}rie : Chiffre d'affaires quotidien en DZD
+  \item P\'{e}riode : 714 jours
+  \item \'{E}valuation : out-of-sample (train/test split temporel)
+  \item Horizons test\'{e}s : 14, 30 et 60 jours
+\end{itemize}
+
+\subsection{Benchmark comparatif de 5 mod\`{e}les}
+
+Pour s\'{e}lectionner le meilleur mod\`{e}le, nous avons \'{e}valu\'{e} \textbf{5 approches} avec une \'{e}valuation rigoureuse \textit{out-of-sample} (aucune donn\'{e}e de test n'est utilis\'{e}e lors de l'entra\^{i}nement) :
+
+\begin{table}[H]
+\centering
+\caption{Benchmark des mod\`{e}les de pr\'{e}vision (horizon 30 jours, tri\'{e} par MAE)}
+\label{tab:forecast_benchmark}
+\begin{tabularx}{\textwidth}{l *{4}{>{\centering\arraybackslash}X}}
+\toprule
+\textbf{Mod\`{e}le} & \textbf{MAE (DZD)} & \textbf{RMSE (DZD)} & \textbf{MAPE} & \textbf{vs MA7} \\
+\midrule
+\textbf{LightGBM + lags + holidays} & \textbf{318~741} & \textbf{416~501} & \textbf{148,0\%} & \textbf{+12,2\%} \\
+Chronos-T5-Small & 338~231 & 395~363 & 132,9\% & +6,8\% \\
+Moyenne Mobile (7j) & 363~075 & 466~570 & 163,9\% & baseline \\
+Prophet + Islamic holidays & 376~292 & 447~736 & 150,6\% & $-$3,6\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Choix du mod\`{e}le : LightGBM}
+
+LightGBM a \'{e}t\'{e} retenu car il offre le \textbf{meilleur MAE} (318~741 DZD, soit une am\'{e}lioration de +12,2\% par rapport \`{a} la baseline Moyenne Mobile), et pr\'{e}sente plusieurs avantages d\'{e}terminants :
+
+\begin{itemize}
+  \item \textbf{Meilleure MAE globale} : 318~741 DZD, la plus basse parmi tous les mod\`{e}les \'{e}valu\'{e}s, ce qui signifie que les pr\'{e}dictions sont en moyenne les plus proches des valeurs r\'{e}elles.
+  \item \textbf{Support des covariables exog\`{e}nes} : contrairement \`{a} Chronos (zero-shot, sans covariables), LightGBM int\`{e}gre les \'{e}v\'{e}nements du calendrier islamique (Ramadan, A\"{i}d el-Fitr, A\"{i}d el-Adha, Mawlid), essentiels pour le march\'{e} alg\'{e}rien o\`{u} ces p\'{e}riodes influencent fortement la demande.
+  \item \textbf{Entra\^{i}nement sur les donn\'{e}es sp\'{e}cifiques} : le mod\`{e}le apprend les motifs propres au jeu de donn\'{e}es, contrairement \`{a} l'approche zero-shot de Chronos.
+  \item \textbf{Pr\'{e}vision multi-\'{e}tape r\'{e}cursive} : chaque pr\'{e}diction est r\'{e}inject\'{e}e pour g\'{e}n\'{e}rer l'horizon suivant.
+\end{itemize}
+
+\subsection{Ing\'{e}nierie des features temporelles}
+
+Le mod\`{e}le utilise \textbf{20 features} regroup\'{e}es en 5 cat\'{e}gories :
+
+\begin{table}[H]
+\centering
+\caption{Features utilis\'{e}es pour la pr\'{e}vision de la demande (LightGBM)}
+\label{tab:forecast_features}
+\begin{tabularx}{\textwidth}{l l X}
+\toprule
+\textbf{Cat\'{e}gorie} & \textbf{Features} & \textbf{Description} \\
+\midrule
+\multirow{3}{*}{Temporelles (5)} & day\_of\_week, month & Jour de la semaine, mois \\
+ & is\_weekend & Jour f\'{e}ri\'{e} alg\'{e}rien (ven-sam + jours f\'{e}ri\'{e}s) \\
+ & day\_of\_month, week\_of\_year & Jour du mois, semaine de l'ann\'{e}e \\
+\midrule
+\multirow{2}{*}{\'{E}v\'{e}nements islamiques (4)} & ramadan, eid\_al\_fitr & P\'{e}riode de Ramadan, f\^{e}te de l'A\"{i}d el-Fitr (3j) \\
+ & eid\_al\_adha, mawlid & F\^{e}te de l'A\"{i}d el-Adha (3j), Mawlid \\
+\midrule
+Jours f\'{e}ri\'{e}s nationaux (1) & algerian\_holiday & 1\textsuperscript{er} jan, Yennayer,  1\textsuperscript{er} mai, 5 juil, 1\textsuperscript{er} nov \\
+\midrule
+Lag features (4) & lag\_1, lag\_7, lag\_14, lag\_28 & Retards de 1, 7, 14 et 28 jours \\
+\midrule
+\multirow{2}{*}{Statistiques glissantes (6)} & rolling\_mean\_7/14/28 & Moyenne glissante sur 7, 14, 28 jours \\
+ & rolling\_std\_7/14/28 & \'{E}cart-type glissant sur 7, 14, 28 jours \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Les covariables du calendrier islamique sont calcul\'{e}es de mani\`{e}re programmatique via la biblioth\`{e}que \texttt{hijri-converter}, qui convertit les dates gr\'{e}goriennes en dates Hijri pour d\'{e}terminer automatiquement les p\'{e}riodes de Ramadan et des f\^{e}tes religieuses. Les jours f\'{e}ri\'{e}s nationaux alg\'{e}riens (1\textsuperscript{er} janvier, Yennayer 12 janvier, 1\textsuperscript{er} mai, 5 juillet, 1\textsuperscript{er} novembre) sont \'{e}galement int\'{e}gr\'{e}s comme covariable. Le feature \texttt{is\_weekend} regroupe tous les jours ch\^{o}m\'{e}s alg\'{e}riens : week-end (vendredi-samedi), f\^{e}tes nationales et f\^{e}tes islamiques.
+
+\subsection{Mod\`{e}les par cat\'{e}gorie}
+
+En plus du mod\`{e}le global, des s\'{e}ries temporelles sp\'{e}cifiques sont maintenues pour les 3 cat\'{e}gories principales :
+
+\begin{table}[H]
+\centering
+\caption{Mod\`{e}les de pr\'{e}vision par cat\'{e}gorie de produit}
+\label{tab:forecast_cats}
+\begin{tabularx}{\textwidth}{l X}
+\toprule
+\textbf{Cat\'{e}gorie} & \textbf{Description} \\
+\midrule
+all (global) & Pr\'{e}vision du chiffre d'affaires total quotidien \\
+bed\_bath\_table & Linge de maison, salle de bain, d\'{e}coration \\
+health\_beauty & Sant\'{e} et beaut\'{e} \\
+sports\_leisure & Sports et loisirs \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Pourquoi les mod\`{e}les fondamentaux (HuggingFace) ne sont pas adapt\'{e}s}
+
+Les mod\`{e}les fondamentaux de s\'{e}ries temporelles tels que TimesFM (Google), Chronos-Large (Amazon), MOIRAI (Salesforce) et Lag-Llama sont con\c{c}us pour la pr\'{e}vision \textit{zero-shot} --- ils ne prennent pas en entr\'{e}e de covariables exog\`{e}nes. Or, notre avantage comp\'{e}titif repose pr\'{e}cis\'{e}ment sur l'int\'{e}gration du \textbf{calendrier alg\'{e}rien} (islamique + national) comme covariable pour le march\'{e} alg\'{e}rien.
+
+LightGBM est le choix optimal pour plusieurs raisons :
+
+\begin{itemize}
+  \item \textbf{Support natif des covariables} : Int\`{e}gre nativement 20 covariables (4 \'{e}v\'{e}nements islamiques + 1 jours f\'{e}ri\'{e}s nationaux + 5 features calendaires + 4 lags + 6 statistiques glissantes).
+  \item \textbf{R\'{e}entra\^{i}nement rapide} : Quelques secondes pour s'adapter \`{a} de nouvelles donn\'{e}es, contre des heures pour un mod\`{e}le de type transformer.
+  \item \textbf{Petite s\'{e}rie temporelle} : 714 jours de donn\'{e}es favorisent les mod\`{e}les simples par rapport au deep learning, qui n\'{e}cessite des milliers de s\'{e}ries temporelles pour g\'{e}n\'{e}raliser.
+  \item \textbf{Alternative deep learning} : TFT (\textit{Temporal Fusion Transformer}) est le seul mod\`{e}le deep learning supportant les covariables, mais il n\'{e}cessite des milliers de s\'{e}ries temporelles pour surpasser LightGBM --- une condition non remplie par notre dataset.
+\end{itemize}
+
+
+\section{Int\'{e}gration LLM : Google Gemini}
+
+Le module d'insights utilise l'API Google Gemini (\texttt{gemini-2.5-flash}) pour g\'{e}n\'{e}rer des explications et recommandations en langage naturel dans trois langues :
+
+\begin{itemize}
+  \item \textbf{Arabe} : Langue officielle
+  \item \textbf{Fran\c{c}ais} : Langue d'affaires
+  \item \textbf{Anglais} : Langue technique
+\end{itemize}
+
+Les endpoints LLM fournissent :
+\begin{enumerate}
+  \item \textbf{R\'{e}sum\'{e}s de p\'{e}riode} : Synth\`{e}se des KPIs avec analyse des tendances
+  \item \textbf{Explication du risque} : Explication en langage naturel du score de risque d'une commande
+  \item \textbf{Recommandations} : Suggestions d'actions commerciales contextualis\'{e}es
+\end{enumerate}
+
+\section{Synth\`{e}se comparative des mod\`{e}les}
+
+\begin{table}[H]
+\centering
+\caption{Synth\`{e}se des mod\`{e}les d\'{e}velopp\'{e}s}
+\label{tab:synthesis}
+\begin{tabularx}{\textwidth}{l l l X}
+\toprule
+\textbf{T\^{a}che} & \textbf{Type} & \textbf{Mod\`{e}le(s)} & \textbf{M\'{e}trique cl\'{e}} \\
+\midrule
+Risque livraison & Classification & CatBoost + LightGBM + XGBoost & AUC-ROC = 0.9961, F1 = 0.9999, Rappel(\'echecs) = 98\% \\
+Segmentation & Clustering & HDBSCAN / KMeans (hybride) & 3--5 clusters, silhouette 0.485 \\
+Pr\'{e}vision demande & S\'{e}rie temporelle & LightGBM + Calendrier islamique & MAE = 318~741 DZD (+12,2\% vs baseline) \\
+Insights NL & G\'{e}n\'{e}ratif & Google Gemini & Multilingue (AR/FR/EN) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+% ══════════════════════════════════════════════════════════════
+% CONCLUSION GENERALE
+% ══════════════════════════════════════════════════════════════
+\chapter*{Conclusion G\'{e}n\'{e}rale}
+\addcontentsline{toc}{chapter}{Conclusion G\'{e}n\'{e}rale}
+
+Ce projet a permis de concevoir et de d\'{e}velopper un CRM intelligent pour le e-commerce COD en Alg\'{e}rie, int\'{e}grant un module de pr\'{e}diction des ventes bas\'{e} sur le Machine Learning.
+
+\textbf{Les contributions principales sont :}
+
+\begin{enumerate}
+  \item \textbf{Un CRM complet} : 12 tables, 11 modules fonctionnels, architecture multi-tenant avec gestion fine des r\^{o}les (RBAC \`{a} 6 r\^{o}les).
+
+  \item \textbf{Une base de donn\'{e}es rigoureusement con\c{c}ue} : Sch\'{e}ma normalis\'{e} avec int\'{e}grit\'{e} r\'{e}f\'{e}rentielle, pistes d'audit, support multilingue (UTF8MB4), et isolation multi-tenant par \texttt{store\_id}.
+
+  \item \textbf{Un module ML multi-t\^{a}ches} :
+  \begin{itemize}
+    \item Pr\'{e}diction du risque par un ensemble de 3 mod\`{e}les (CatBoost, LightGBM, XGBoost) atteignant un AUC-ROC de \textbf{0.9961} et un F1-Score de 0.9999 (m\'{e}triques honn\^{e}tes, sans fuite de donn\'{e}es). L'optimisation en quatre \'{e}tapes (cible propre, 31 features enrichies, ADASYN, Optuna) a port\'{e} le rappel de d\'{e}tection des \'{e}checs de 25\% \`{a} \textbf{98\%} avec une pr\'{e}cision de \textbf{100\%}.
+    \item Segmentation automatique des clients par approche hybride HDBSCAN/KMeans identifiant 3 \`{a} 5 profils distincts selon la taille du jeu de donn\'{e}es
+    \item Pr\'{e}vision de la demande par LightGBM avec covariables du calendrier islamique (Ramadan, A\"{i}d el-Fitr, A\"{i}d el-Adha, Mawlid via \texttt{hijri-converter}), s\'{e}lectionn\'{e} apr\`{e}s un benchmark de 5 mod\`{e}les, offrant le meilleur MAE (318~741 DZD, +12,2\% vs baseline)
+  \end{itemize}
+
+  \item \textbf{Une comparaison rigoureuse} : Trois algorithmes de gradient boosting compar\'{e}s sur 5 m\'{e}triques, et 5 mod\`{e}les de s\'{e}ries temporelles compar\'{e}s sur MAE, RMSE et MAPE avec une \'{e}valuation out-of-sample.
+
+  \item \textbf{Une architecture modulaire} : Le microservice ML (FastAPI) communique avec le backend PHP via API REST, permettant un d\'{e}ploiement ind\'{e}pendant et un passage \`{a} l'\'{e}chelle.
+
+  \item \textbf{Une interface enti\`{e}rement multilingue} : L'ensemble des pages du tableau de bord, y compris les modules IA (pr\'{e}diction de risque, segmentation, pr\'{e}vision, r\'{e}entra\^{i}nement), sont internationalis\'{e}es en trois langues (arabe, fran\c{c}ais, anglais) avec support RTL.
+\end{enumerate}
+
+\textbf{Perspectives :}
+
+\begin{itemize}
+  \item \textbf{Donn\'{e}es r\'{e}elles} : R\'{e}entra\^{i}ner les mod\`{e}les sur les donn\'{e}es r\'{e}elles du e-commerce alg\'{e}rien pour des performances repr\'{e}sentatives.
+  \item \textbf{Saisonnalit\'{e} locale} : Le calendrier alg\'{e}rien complet est int\'{e}gr\'{e} : \'{e}v\'{e}nements islamiques (Ramadan, A\"{i}d el-Fitr, A\"{i}d el-Adha, Mawlid) via \texttt{hijri-converter}, et jours f\'{e}ri\'{e}s nationaux (1\textsuperscript{er} janvier, Yennayer, 1\textsuperscript{er} mai, 5 juillet, 1\textsuperscript{er} novembre). Le feature \texttt{is\_weekend} couvre aussi tous les jours ch\^{o}m\'{e}s (vendredi-samedi + jours f\'{e}ri\'{e}s). Il reste \`{a} int\'{e}grer les \'{e}v\'{e}nements commerciaux (rentr\'{e}e scolaire, promotions) pour enrichir la couverture.
+  \item \textbf{Apprentissage en ligne} : Mettre \`{a} jour les mod\`{e}les en continu avec les nouvelles commandes.
+  \item \textbf{A/B testing} : Mesurer l'impact r\'{e}el des recommandations ML sur le taux de livraison.
+\end{itemize}
+
+
+% ══════════════════════════════════════════════════════════════
+% BIBLIOGRAPHIE
+% ══════════════════════════════════════════════════════════════
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliographie}
+
+\bibitem{chawla2002smote}
+N. V. Chawla, K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer, ``SMOTE: Synthetic Minority Over-sampling Technique,'' \textit{Journal of Artificial Intelligence Research}, vol. 16, pp. 321--357, 2002.
+
+\bibitem{he2008adasyn}
+H. He, Y. Bai, E. A. Garcia, and S. Li, ``ADASYN: Adaptive Synthetic Sampling Approach for Imbalanced Learning,'' in \textit{Proceedings of the IEEE International Joint Conference on Neural Networks}, pp. 1322--1328, 2008.
+
+\bibitem{chen2016xgboost}
+T. Chen and C. Guestrin, ``XGBoost: A Scalable Tree Boosting System,'' in \textit{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}, pp. 785--794, 2016.
+
+\bibitem{ke2017lightgbm}
+G. Ke, Q. Meng, T. Finley, T. Wang, W. Chen, W. Ma, Q. Ye, and T.-Y. Liu, ``LightGBM: A Highly Efficient Gradient Boosting Decision Tree,'' in \textit{Advances in Neural Information Processing Systems 30}, pp. 3146--3154, 2017.
+
+\bibitem{prokhorenkova2018catboost}
+L. Prokhorenkova, G. Gusev, A. Vorobev, A. V. Dorogush, and A. Gulin, ``CatBoost: Unbiased Boosting with Categorical Features,'' in \textit{Advances in Neural Information Processing Systems 31}, pp. 6638--6648, 2018.
+
+\bibitem{taylor2018forecasting}
+S. J. Taylor and B. Letham, ``Forecasting at Scale,'' \textit{The American Statistician}, vol. 72, no. 1, pp. 37--45, 2018.
+
+\bibitem{mcinnes2017hdbscan}
+L. McInnes, J. Healy, and S. Astels, ``hdbscan: Hierarchical density based clustering,'' \textit{Journal of Open Source Software}, vol. 2, no. 11, p. 205, 2017.
+
+\bibitem{grinsztajn2022tree}
+L. Grinsztajn, E. Oyallon, and G. Varoquaux, ``Why do tree-based models still outperform deep learning on tabular data?'' in \textit{Advances in Neural Information Processing Systems 35}, 2022.
+
+\bibitem{olist2018}
+Olist, ``Brazilian E-Commerce Public Dataset by Olist,'' Kaggle, 2018. [Online]. Available: \url{https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce}
+
+\bibitem{ansari2024chronos}
+A. F. Ansari, L. Stella, C. Turkmen, X. Zhang, P. Mercado, H. Shen, O. Shchur, S. S. Rangapuram, S. P. Arango, S. Kapoor, J. Zschiegner, D. C. Maddix, M. W. Mahoney, K. Torkkola, A. G. Wilson, M. Bohlke-Schneider, and Y. Wang, ``Chronos: Learning the Language of Time Series,'' \textit{arXiv preprint arXiv:2403.07815}, 2024.
+
+\end{thebibliography}
+
+
+% ══════════════════════════════════════════════════════════════
+% ANNEXES
+% ══════════════════════════════════════════════════════════════
+\appendix
+\chapter{Annexe : Exemple de requ\^{e}te et r\'{e}ponse de l'API}
+
+\section{Pr\'{e}diction du risque d'une commande}
+
+\begin{lstlisting}[language={}, caption={Requ\^{e}te POST /api/predict/order-risk}]
+{
+  "customer_name": "Ahmed Benali",
+  "total_amount": 3000,
+  "shipping_cost": 400,
+  "customer_order_count": 5,
+  "customer_total_spent": 12000,
+  "is_repeat_customer": true,
+  "payment_method": "credit_card",
+  "estimated_delivery_days": 5
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language={}, caption={R\'{e}ponse de l'API de pr\'{e}diction}]
+{
+  "success": true,
+  "data": {
+    "score": 100.0,
+    "category": "low",
+    "success_probability": 1.0,
+    "reasons": [
+      "Cross-region delivery"
+    ],
+    "recommendation": "Low risk order.
+      Proceed with standard workflow.",
+    "model_scores": {
+      "catboost": 100.0,
+      "lightgbm": 100.0,
+      "xgboost": 100.0
+    }
+  }
+}
+\end{lstlisting}
+
+\section{Pr\'{e}vision de la demande}
+
+\begin{lstlisting}[language={}, caption={R\'{e}ponse GET /api/forecast/demand?category=all\&periods=7}]
+{
+  "success": true,
+  "data": {
+    "category": "all",
+    "periods": 7,
+    "method": "lightgbm",
+    "predictions": [
+      {"ds": "2018-08-30", "yhat": 728927.35,
+       "yhat_lower": 479230.78, "yhat_upper": 981872.42},
+      {"ds": "2018-08-31", "yhat": 704937.78,
+       "yhat_lower": 435953.28, "yhat_upper": 960256.39},
+      {"ds": "2018-09-01", "yhat": 470569.50,
+       "yhat_lower": 207655.72, "yhat_upper": 722730.63}
+    ]
+  }
+}
+\end{lstlisting}
+
+\end{document}
